@@ -56,7 +56,7 @@ export class AllModulesService {
 
   // Post Method Api
   add(user: any, type): Observable<any> {
-    this.apiurl = `api/${type}`;
+    this.apiurl = `https://onehr-employee-service.azurewebsites.net/api/employees?code=R0USqHH5Btohh0iqORO9c6VLTUzaOX6jtNp2onQaa6aasaZlrMRwFQ==`;
     user.id = null;
     return this.http
       .post<any>(this.apiurl, user, this.httpOptions)

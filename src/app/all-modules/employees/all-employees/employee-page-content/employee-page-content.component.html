@@ -96,7 +96,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form (ngSubmit)="addEmployee()" [formGroup]="editEmployeeForm">
+                <form (ngSubmit)="addEmployee()" [formGroup]="addEmployeeForm">
 
                     <div class="row">
                         <div class="card tab-box">
@@ -134,7 +134,7 @@
                             <div class="row">
                                 <div class="col-sm-6">
                                     <div class="form-group">
-                                        <label class="col-form-label">Company</label>
+                                        <label class="col-form-label">Company <span class="text-danger">*</span></label>
                                         <select class="select form-control"
                                             [class.invalid]="addEmployeeForm.get('CompanyName').invalid && addEmployeeForm.get('CompanyName').touched"
                                             formControlName="CompanyName">
@@ -146,14 +146,14 @@
                                             *ngIf="addEmployeeForm.get('CompanyName').invalid && addEmployeeForm.get('CompanyName').touched">
                                             <small
                                                 *ngIf="addEmployeeForm.get('CompanyName').invalid && addEmployeeForm.get('CompanyName').touched"
-                                                class="text-danger"> Company Name required</small>
+                                                class="text-danger">Company Name required</small>
                                         </div>
                                     </div>
                                 </div>
 
                                 <div class="col-sm-6">
                                     <div class="form-group">
-                                        <label class="col-form-label"> Name <span class="text-danger">*</span></label>
+                                        <label class="col-form-label">Name <span class="text-danger">*</span></label>
                                         <input class="form-control" type="text"
                                             [class.invalid]="addEmployeeForm.get('Name').invalid && addEmployeeForm.get('Name').touched"
                                             formControlName="Name">
@@ -161,14 +161,14 @@
                                             *ngIf="addEmployeeForm.get('Name').invalid && addEmployeeForm.get('Name').touched">
                                             <small
                                                 *ngIf="addEmployeeForm.get('Name').invalid && addEmployeeForm.get('Name').touched"
-                                                class="text-danger"> *Name is required</small>
+                                                class="text-danger">Name is required</small>
                                         </div>
                                     </div>
                                 </div>
 
                                 <div class="col-sm-6">
                                     <div class="form-group">
-                                        <label class="col-form-label"> Employee Code <span
+                                        <label class="col-form-label">Employee Code <span
                                                 class="text-danger">*</span></label>
                                         <input class="form-control" type="text"
                                             [class.invalid]="addEmployeeForm.get('EmployeeCode').invalid && addEmployeeForm.get('EmployeeCode').touched"
@@ -177,7 +177,7 @@
                                             *ngIf="addEmployeeForm.get('EmployeeCode').invalid && addEmployeeForm.get('EmployeeCode').touched">
                                             <small
                                                 *ngIf="addEmployeeForm.get('EmployeeCode').invalid && addEmployeeForm.get('EmployeeCode').touched"
-                                                class="text-danger"> *Employee Code is required</small>
+                                                class="text-danger">Employee Code is required</small>
                                         </div>
                                     </div>
                                 </div>
@@ -203,7 +203,7 @@
 
                                 <div class="col-sm-6">
                                     <div class="form-group">
-                                        <label class="col-form-label">Birth Date </label>
+                                        <label class="col-form-label">Date of Birth</label>
                                         <div class="cal-icon">
 
                                             <input class="form-control datetimepicker" type="text" bsDatepicker
@@ -221,7 +221,7 @@
 
                                 <div class="col-sm-6">
                                     <div class="form-group">
-                                        <label class="col-form-label">Mobile No </label>
+                                        <label class="col-form-label">Mobile No</label>
                                         <input class="form-control" type="text"
                                             [class.invalid]="addEmployeeForm.get('MobileNo').invalid && addEmployeeForm.get('MobileNo').touched"
                                             formControlName="MobileNo">
@@ -236,7 +236,7 @@
 
                                 <div class="col-sm-6">
                                     <div class="form-group">
-                                        <label class="col-form-label">Email </label>
+                                        <label class="col-form-label">Email</label>
                                         <input class="form-control" type="Email"
                                             [class.invalid]="addEmployeeForm.get('EmailId').invalid && addEmployeeForm.get('EmailId').touched"
                                             formControlName="EmailId">
@@ -251,7 +251,7 @@
 
                                 <div class="col-sm-6">
                                     <div class="form-group">
-                                        <label class="col-form-label">Blood Group </label>
+                                        <label class="col-form-label">Blood Group</label>
                                         <input class="form-control" type="BloodGroup"
                                             [class.invalid]="addEmployeeForm.get('BloodGroup').invalid && addEmployeeForm.get('BloodGroup').touched"
                                             formControlName="BloodGroup">
@@ -285,7 +285,7 @@
 
                                 <div class="col-sm-6">
                                     <div class="form-group">
-                                        <label class="col-form-label">No Of Dependants </label>
+                                        <label class="col-form-label">No Of Dependants</label>
                                         <input class="form-control" type="text"
                                             [class.invalid]="addEmployeeForm.get('BloodGroup').invalid && addEmployeeForm.get('NoOfDependants').touched"
                                             formControlName="NoOfDependants">
@@ -335,7 +335,7 @@
                                             *ngIf="addEmployeeForm.get('CompanyDetails.CompanyName').invalid && addEmployeeForm.get('CompanyDetails.CompanyName').touched">
                                             <small
                                                 *ngIf="addEmployeeForm.get('CompanyDetails.CompanyName').invalid && addEmployeeForm.get('CompanyDetails.CompanyName').touched"
-                                                class="text-danger"> Company Name required</small>
+                                                class="text-danger">Company Name required</small>
                                         </div>
                                     </div>
                                 </div>
@@ -469,7 +469,7 @@
 
                                 <div class="col-sm-6">
                                     <div class="form-group">
-                                        <label class="col-form-label"> district </label>
+                                        <label class="col-form-label"> District </label>
                                         <input class="form-control" type="text"
                                             [class.invalid]="addEmployeeForm.get('AddressDetails.district').invalid && addEmployeeForm.get('AddressDetails.district').touched"
                                             formControlName="district">
@@ -687,19 +687,19 @@
 
                                 <div class="col-sm-6">
                                     <div class="form-group">
-                                        <label class="col-form-label"> Hosusing Alloawance </label>
+                                        <label class="col-form-label"> Hosusing Allowances </label>
                                         <input class="form-control" type="text"
-                                            [class.invalid]="addEmployeeForm.get('SalaryDetails.HosusingAlloawance').invalid && addEmployeeForm.get('SalaryDetails.HosusingAlloawance').touched"
-                                            formControlName="HosusingAlloawance">
+                                            [class.invalid]="addEmployeeForm.get('SalaryDetails.HosusingAllowances').invalid && addEmployeeForm.get('SalaryDetails.HosusingAllowances').touched"
+                                            formControlName="HosusingAllowances">
                                     </div>
                                 </div>
 
                                 <div class="col-sm-6">
                                     <div class="form-group">
-                                        <label class="col-form-label"> Transport Alloawance </label>
+                                        <label class="col-form-label"> Transport Allowances </label>
                                         <input class="form-control" type="text"
-                                            [class.invalid]="addEmployeeForm.get('SalaryDetails.TransportAlloawance').invalid && addEmployeeForm.get('SalaryDetails.TransportAlloawance').touched"
-                                            formControlName="TransportAlloawance">
+                                            [class.invalid]="addEmployeeForm.get('SalaryDetails.TransportAllowances').invalid && addEmployeeForm.get('SalaryDetails.TransportAllowances').touched"
+                                            formControlName="TransportAllowances">
                                     </div>
                                 </div>
 
@@ -714,10 +714,10 @@
 
                                 <div class="col-sm-6">
                                     <div class="form-group">
-                                        <label class="col-form-label"> Other Alloawances </label>
+                                        <label class="col-form-label"> Other Allowancess </label>
                                         <input class="form-control" type="text"
-                                            [class.invalid]="addEmployeeForm.get('SalaryDetails.OtherAlloawances').invalid && addEmployeeForm.get('SalaryDetails.OtherAlloawances').touched"
-                                            formControlName="OtherAlloawances">
+                                            [class.invalid]="addEmployeeForm.get('SalaryDetails.OtherAllowancess').invalid && addEmployeeForm.get('SalaryDetails.OtherAllowancess').touched"
+                                            formControlName="OtherAllowancess">
                                     </div>
                                 </div>
 
@@ -1458,19 +1458,19 @@
 
                                 <div class="col-sm-6">
                                     <div class="form-group">
-                                        <label class="col-form-label"> Hosusing Alloawance </label>
+                                        <label class="col-form-label"> Hosusing Allowances </label>
                                         <input class="form-control" type="text"
-                                            [class.invalid]="editEmployeeForm.get('SalaryDetails.HosusingAlloawance').invalid && editEmployeeForm.get('SalaryDetails.HosusingAlloawance').touched"
-                                            formControlName="HosusingAlloawance">
+                                            [class.invalid]="editEmployeeForm.get('SalaryDetails.HosusingAllowances').invalid && editEmployeeForm.get('SalaryDetails.HosusingAllowances').touched"
+                                            formControlName="HosusingAllowances">
                                     </div>
                                 </div>
 
                                 <div class="col-sm-6">
                                     <div class="form-group">
-                                        <label class="col-form-label"> Transport Alloawance </label>
+                                        <label class="col-form-label"> Transport Allowances </label>
                                         <input class="form-control" type="text"
-                                            [class.invalid]="editEmployeeForm.get('SalaryDetails.TransportAlloawance').invalid && editEmployeeForm.get('SalaryDetails.TransportAlloawance').touched"
-                                            formControlName="TransportAlloawance">
+                                            [class.invalid]="editEmployeeForm.get('SalaryDetails.TransportAllowances').invalid && editEmployeeForm.get('SalaryDetails.TransportAllowances').touched"
+                                            formControlName="TransportAllowances">
                                     </div>
                                 </div>
 
@@ -1485,10 +1485,10 @@
 
                                 <div class="col-sm-6">
                                     <div class="form-group">
-                                        <label class="col-form-label"> Other Alloawances </label>
+                                        <label class="col-form-label"> Other Allowancess </label>
                                         <input class="form-control" type="text"
-                                            [class.invalid]="editEmployeeForm.get('SalaryDetails.OtherAlloawances').invalid && editEmployeeForm.get('SalaryDetails.OtherAlloawances').touched"
-                                            formControlName="OtherAlloawances">
+                                            [class.invalid]="editEmployeeForm.get('SalaryDetails.OtherAllowancess').invalid && editEmployeeForm.get('SalaryDetails.OtherAllowancess').touched"
+                                            formControlName="OtherAllowancess">
                                     </div>
                                 </div>
 

@@ -87,10 +87,10 @@ export class EmployeePageContentComponent implements OnInit {
       SalaryDetails: this.formBuilder.group({
         TotalSalary: [],
         BasicSalary: [],
-        HosusingAlloawance: [],
-        TransportAlloawance: [],
+        HosusingAllowances: [],
+        TransportAllowances: [],
         Deductions: [],
-        OtherAlloawances: [],
+        OtherAllowancess: [],
       }),
       ActiveVacationDetails: this.formBuilder.group({
         VacationType: [],
@@ -160,10 +160,10 @@ export class EmployeePageContentComponent implements OnInit {
       SalaryDetails: this.formBuilder.group({
         TotalSalary: [],
         BasicSalary: [],
-        HosusingAlloawance: [],
-        TransportAlloawance: [],
+        HosusingAllowances: [],
+        TransportAllowances: [],
         Deductions: [],
-        OtherAlloawances: [],
+        OtherAllowancess: [],
       }),
       ActiveVacationDetails: this.formBuilder.group({
         VacationType: [],
@@ -215,8 +215,15 @@ export class EmployeePageContentComponent implements OnInit {
       designation: this.addEmployeeForm.value.Designation,
       mobile: "9944996335",
       role: "Web developer",
-    };
-    this.srvModuleService.add(obj, this.url).subscribe((data) => { });
+    };    
+    let finalObj = this.addEmployeeForm.value;
+    finalObj.isActive = true
+    delete finalObj.BankingAndInsuranceDetails.InsuranceCoverage;
+    finalObj.IqamaDetails.IsIqamaExpired = false;
+    console.log('finalObj', finalObj);
+    this.srvModuleService.add(finalObj, this.url).subscribe((data) => {
+      console.log('data', data);
+     });
     this.loadEmployee();
     $("#add_employee").modal("hide");
     this.addEmployeeForm.reset();
