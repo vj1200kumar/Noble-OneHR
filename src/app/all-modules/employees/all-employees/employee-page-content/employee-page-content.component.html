@@ -1,0 +1,1652 @@
+<!-- Page Content -->
+<div class="content container-fluid">
+
+    <!-- Page Header -->
+    <div class="page-header">
+        <div class="row align-items-center">
+            <div class="col">
+                <h3 class="page-title">Employee</h3>
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+                    <li class="breadcrumb-item active">Employee</li>
+                </ul>
+            </div>
+            <div class="col-auto float-right ml-auto">
+                <a class="btn add-btn" data-toggle="modal" data-target="#add_employee"><i class="fa fa-plus"></i> Add
+                    Employee</a>
+                <div class="view-icons">
+                    <a routerLink="/employees/employeepage" class="grid-view btn btn-link active"><i
+                            class="fa fa-th"></i></a>
+                    <a routerLink="/employees/employeelist" class="list-view btn btn-link"><i
+                            class="fa fa-bars"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /Page Header -->
+
+    <!-- Search Filter -->
+    <div class="row filter-row">
+        <div class="col-sm-6 col-md-3">
+            <div class="form-group form-focus">
+                <input type="text" class="form-control floating" (input)="searchId($event.target.value)">
+                <label class=" focus-label">Employee ID</label>
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-3">
+            <div class="form-group form-focus">
+                <input type="text" class="form-control floating" (input)="searchName($event.target.value)">
+                <label class="focus-label">Employee Name</label>
+            </div>
+        </div>
+        <!-- <div class="col-sm-6 col-md-3">
+            <div class="form-group form-focus select-focus">
+                <select class="select form-control" (input)="searchByDesignation($event.target.value)">
+                    <option>Select Designation</option>
+                    <option>Web Developer</option>
+                    <option>Web Designer</option>
+                    <option>Android Developer</option>
+                    <option>Ios Developer</option>
+                </select>
+                <label class="focus-label">Designation</label>
+            </div>
+        </div> -->
+        <div class="col-sm-6 col-md-3">
+            <a class="btn btn-success btn-block"> Search </a>
+        </div>
+    </div>
+    <!-- Search Filter -->
+
+    <div class="row staff-grid-row">
+        <div class="col-md-4 col-sm-6 col-12 col-lg-4 col-xl-3" *ngFor="let emp of lstEmployee;let i = index">
+            <div class="profile-widget">
+                <div class="profile-img">
+                    <a routerLink="/employees/employeeprofile" class="avatar"><img
+                            src="assets/img/profiles/avatar-0{{i+ 1}}.jpg" alt=""></a>
+                </div>
+                <div class="dropdown profile-action">
+                    <a class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i
+                            class="material-icons">more_vert</i></a>
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <a class="dropdown-item" data-toggle="modal" data-target="#edit_employee"
+                            (click)="editEmp(emp.id)"><i class="fa fa-pencil m-r-5"></i> Edit</a>
+                        <a class="dropdown-item" data-toggle="modal" data-target="#delete_employee"
+                            (click)="tempId = emp.id"><i class="fa fa-trash-o m-r-5"></i> Delete</a>
+                    </div>
+                </div>
+                <h4 class="user-name m-t-10 mb-0 text-ellipsis"><a
+                        routerLink="/employees/employeeprofile">{{emp.firstname}}</a>
+                </h4>
+                <div class="small text-muted">{{emp.designation}}</div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /Page Content -->
+
+
+<!-- Add Employee Modal -->
+<div id="add_employee" class="modal custom-modal fade" role="dialog">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Add Employee</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form (ngSubmit)="addEmployee()" [formGroup]="editEmployeeForm">
+
+                    <div class="row">
+                        <div class="card tab-box">
+                            <div class="row user-tabs">
+                                <div class="col-lg-12 col-md-12 col-sm-12 nav-tabs">
+                                    <ul class="nav nav-tabs nav-tabs-bottom">
+                                        <li class="nav-item"><a href="#emp_profile" data-toggle="tab"
+                                                class="nav-link active"> Basic Details</a></li>
+                                        <li class="nav-item"><a href="#emp_company" data-toggle="tab" class="nav-link">
+                                                Company</a></li>
+                                        <li class="nav-item"><a href="#emp_address" data-toggle="tab" class="nav-link">
+                                                Address</a></li>
+                                        <li class="nav-item"><a href="#emp_iqama" data-toggle="tab"
+                                                class="nav-link">Iqama</a></li>
+                                        <li class="nav-item"><a href="#emp_passport" data-toggle="tab"
+                                                class="nav-link">Passport</a></li>
+                                        <li class="nav-item"><a href="#emp_ecd" data-toggle="tab"
+                                                class="nav-link">Emergency Contacts</a></li>
+                                        <li class="nav-item"><a href="#emp_banking" data-toggle="tab"
+                                                class="nav-link">Banking & Insurance</a></li>
+                                        <li class="nav-item"><a href="#emp_salary" data-toggle="tab"
+                                                class="nav-link">Salary</a></li>
+                                        <li class="nav-item"><a href="#emp_activevacation" data-toggle="tab"
+                                                class="nav-link">Active Vacation</a></li>
+                                        <li class="nav-item"><a href="#emp_vacation" data-toggle="tab"
+                                                class="nav-link">Vacation</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tab-content">
+                        <div id="emp_profile" class="pro-overview tab-pane fade show active">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="col-form-label">Company</label>
+                                        <select class="select form-control"
+                                            [class.invalid]="addEmployeeForm.get('CompanyName').invalid && addEmployeeForm.get('CompanyName').touched"
+                                            formControlName="CompanyName">
+                                            <option value="">-- Select --</option>
+                                            <option value="10000">Dyaft Mudun</option>
+                                            <option value="10001">Mudun Investement</option>
+                                        </select>
+                                        <div
+                                            *ngIf="addEmployeeForm.get('CompanyName').invalid && addEmployeeForm.get('CompanyName').touched">
+                                            <small
+                                                *ngIf="addEmployeeForm.get('CompanyName').invalid && addEmployeeForm.get('CompanyName').touched"
+                                                class="text-danger"> Company Name required</small>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="col-form-label"> Name <span class="text-danger">*</span></label>
+                                        <input class="form-control" type="text"
+                                            [class.invalid]="addEmployeeForm.get('Name').invalid && addEmployeeForm.get('Name').touched"
+                                            formControlName="Name">
+                                        <div
+                                            *ngIf="addEmployeeForm.get('Name').invalid && addEmployeeForm.get('Name').touched">
+                                            <small
+                                                *ngIf="addEmployeeForm.get('Name').invalid && addEmployeeForm.get('Name').touched"
+                                                class="text-danger"> *Name is required</small>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="col-form-label"> Employee Code <span
+                                                class="text-danger">*</span></label>
+                                        <input class="form-control" type="text"
+                                            [class.invalid]="addEmployeeForm.get('EmployeeCode').invalid && addEmployeeForm.get('EmployeeCode').touched"
+                                            formControlName="EmployeeCode">
+                                        <div
+                                            *ngIf="addEmployeeForm.get('EmployeeCode').invalid && addEmployeeForm.get('EmployeeCode').touched">
+                                            <small
+                                                *ngIf="addEmployeeForm.get('EmployeeCode').invalid && addEmployeeForm.get('EmployeeCode').touched"
+                                                class="text-danger"> *Employee Code is required</small>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="col-form-label">Gender</label>
+                                        <select class="select form-control"
+                                            [class.invalid]="addEmployeeForm.get('Gender').invalid && addEmployeeForm.get('Gender').touched"
+                                            formControlName="Gender">
+                                            <option value="">-- Select --</option>
+                                            <option value="10000">Male</option>
+                                            <option value="10001">Female</option>
+                                        </select>
+                                        <!-- <div
+                                    *ngIf="addEmployeeForm.get('Gender').invalid && addEmployeeForm.get('Gender').touched">
+                                    <small
+                                        *ngIf="addEmployeeForm.get('Gender').invalid && addEmployeeForm.get('Gender').touched"
+                                        class="text-danger"> Gender Name required</small>
+                                </div> -->
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="col-form-label">Birth Date </label>
+                                        <div class="cal-icon">
+
+                                            <input class="form-control datetimepicker" type="text" bsDatepicker
+                                                [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY',  returnFocusToInput: true }"
+                                                formControlName="BirthDate">
+                                            <!-- <div
+                                                *ngIf="addEmployeeForm.get('BirthDate').invalid && addEmployeeForm.get('BirthDate').touched">
+                                                <small
+                                                    *ngIf="addEmployeeForm.get('BirthDate').invalid && addEmployeeForm.get('BirthDate').touched"
+                                                    class="text-danger"> *Birth Date is required</small>
+                                            </div> -->
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="col-form-label">Mobile No </label>
+                                        <input class="form-control" type="text"
+                                            [class.invalid]="addEmployeeForm.get('MobileNo').invalid && addEmployeeForm.get('MobileNo').touched"
+                                            formControlName="MobileNo">
+                                        <!-- <div
+                                    *ngIf="addEmployeeForm.get('MobileNo').invalid && addEmployeeForm.get('MobileNo').touched">
+                                    <small
+                                        *ngIf="addEmployeeForm.get('MobileNo').invalid && addEmployeeForm.get('MobileNo').touched"
+                                        class="text-danger"> *Mobile No is required</small>
+                                </div> -->
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="col-form-label">Email </label>
+                                        <input class="form-control" type="Email"
+                                            [class.invalid]="addEmployeeForm.get('EmailId').invalid && addEmployeeForm.get('EmailId').touched"
+                                            formControlName="EmailId">
+                                        <!-- <div
+                                    *ngIf="addEmployeeForm.get('EmailId').invalid && addEmployeeForm.get('EmailId').touched">
+                                    <small
+                                        *ngIf="addEmployeeForm.get('EmailId').invalid && addEmployeeForm.get('EmailId').touched"
+                                        class="text-danger"> *Email is required</small>
+                                </div> -->
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="col-form-label">Blood Group </label>
+                                        <input class="form-control" type="BloodGroup"
+                                            [class.invalid]="addEmployeeForm.get('BloodGroup').invalid && addEmployeeForm.get('BloodGroup').touched"
+                                            formControlName="BloodGroup">
+                                        <!-- <div
+                                    *ngIf="addEmployeeForm.get('BloodGroup').invalid && addEmployeeForm.get('BloodGroup').touched">
+                                    <small
+                                        *ngIf="addEmployeeForm.get('BloodGroup').invalid && addEmployeeForm.get('BloodGroup').touched"
+                                        class="text-danger"> *BloodGroup is required</small>
+                                </div> -->
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="col-form-label">Nationality</label>
+                                        <select class="select form-control"
+                                            [class.invalid]="addEmployeeForm.get('Nationality').invalid && addEmployeeForm.get('Nationality').touched"
+                                            formControlName="Nationality">
+                                            <option value="">-- Select --</option>
+                                            <option value="10000">Arabic</option>
+                                            <option value="10001">Pakistani</option>
+                                        </select>
+                                        <!-- <div
+                                    *ngIf="addEmployeeForm.get('Gender').invalid && addEmployeeForm.get('Gender').touched">
+                                    <small
+                                        *ngIf="addEmployeeForm.get('Gender').invalid && addEmployeeForm.get('Gender').touched"
+                                        class="text-danger"> Gender Name required</small>
+                                </div> -->
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="col-form-label">No Of Dependants </label>
+                                        <input class="form-control" type="text"
+                                            [class.invalid]="addEmployeeForm.get('BloodGroup').invalid && addEmployeeForm.get('NoOfDependants').touched"
+                                            formControlName="NoOfDependants">
+                                        <!-- <div
+                                    *ngIf="addEmployeeForm.get('NoOfDependants').invalid && addEmployeeForm.get('NoOfDependants').touched">
+                                    <small
+                                        *ngIf="addEmployeeForm.get('NoOfDependants').invalid && addEmployeeForm.get('NoOfDependants').touched"
+                                        class="text-danger"> *NoOfDependants is required</small>
+                                </div> -->
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="col-form-label">Status</label>
+                                        <select class="select form-control"
+                                            [class.invalid]="addEmployeeForm.get('Status').invalid && addEmployeeForm.get('Status').touched"
+                                            formControlName="Status">
+                                            <option value="">-- Select --</option>
+                                            <option value="10000">Single</option>
+                                            <option value="10001">Married</option>
+                                        </select>
+                                        <!-- <div
+                                    *ngIf="addEmployeeForm.get('Gender').invalid && addEmployeeForm.get('Gender').touched">
+                                    <small
+                                        *ngIf="addEmployeeForm.get('Gender').invalid && addEmployeeForm.get('Gender').touched"
+                                        class="text-danger"> Gender Name required</small>
+                                </div> -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="tab-pane fade" id="emp_company">
+                            <div formGroupName="CompanyDetails" class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="col-form-label">Company</label>
+                                        <select class="select form-control"
+                                            [class.invalid]="addEmployeeForm.get('CompanyDetails.CompanyName').invalid && addEmployeeForm.get('CompanyDetails.CompanyName').touched"
+                                            formControlName="CompanyName">
+                                            <option value="">-- Select --</option>
+                                            <option value="10000">Dyaft Mudun</option>
+                                            <option value="10001">Mudun Investement</option>
+                                        </select>
+                                        <div
+                                            *ngIf="addEmployeeForm.get('CompanyDetails.CompanyName').invalid && addEmployeeForm.get('CompanyDetails.CompanyName').touched">
+                                            <small
+                                                *ngIf="addEmployeeForm.get('CompanyDetails.CompanyName').invalid && addEmployeeForm.get('CompanyDetails.CompanyName').touched"
+                                                class="text-danger"> Company Name required</small>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <div class="form-group">
+                                            <label class="col-form-label">Company No </label>
+                                            <input class="form-control" type="text"
+                                                [class.invalid]="addEmployeeForm.get('CompanyDetails.CompanyNo').invalid && addEmployeeForm.get('CompanyDetails.CompanyNo').touched"
+                                                formControlName="CompanyNo">
+                                            <!-- <div
+                                            *ngIf="addEmployeeForm.get('NoOfDependants').invalid && addEmployeeForm.get('NoOfDependants').touched">
+                                            <small
+                                                *ngIf="addEmployeeForm.get('NoOfDependants').invalid && addEmployeeForm.get('NoOfDependants').touched"
+                                                class="text-danger"> *NoOfDependants is required</small>
+                                        </div> -->
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="col-form-label">Position </label>
+                                        <input class="form-control" type="text"
+                                            [class.invalid]="addEmployeeForm.get('CompanyDetails.Position').invalid && addEmployeeForm.get('CompanyDetails.Position').touched"
+                                            formControlName="Position">
+                                        <!-- <div
+                                            *ngIf="addEmployeeForm.get('NoOfDependants').invalid && addEmployeeForm.get('NoOfDependants').touched">
+                                            <small
+                                                *ngIf="addEmployeeForm.get('NoOfDependants').invalid && addEmployeeForm.get('NoOfDependants').touched"
+                                                class="text-danger"> *NoOfDependants is required</small>
+                                        </div> -->
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="col-form-label">Entry Date </label>
+                                        <div class="cal-icon">
+
+                                            <input class="form-control datetimepicker" type="text" bsDatepicker
+                                                [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY',  returnFocusToInput: true }"
+                                                formControlName="EntryDate">
+                                            <!-- <div
+                                                *ngIf="addEmployeeForm.get('CompanyDetails.EntryDate').invalid && addEmployeeForm.get('CompanyDetails.EntryDate').touched">
+                                                <small
+                                                    *ngIf="addEmployeeForm.get('CompanyDetails.EntryDate').invalid && addEmployeeForm.get('CompanyDetails.EntryDate').touched"
+                                                    class="text-danger"> *Entry Date is required</small>
+                                            </div> -->
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="col-form-label">Hiring Date </label>
+                                        <div class="cal-icon">
+
+                                            <input class="form-control datetimepicker" type="text" bsDatepicker
+                                                [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY',  returnFocusToInput: true }"
+                                                formControlName="HiringDate">
+                                            <!-- <div
+                                                *ngIf="addEmployeeForm.get('CompanyDetails.EntryDate').invalid && addEmployeeForm.get('CompanyDetails.EntryDate').touched">
+                                                <small
+                                                    *ngIf="addEmployeeForm.get('CompanyDetails.EntryDate').invalid && addEmployeeForm.get('CompanyDetails.EntryDate').touched"
+                                                    class="text-danger"> *Entry Date is required</small>
+                                            </div> -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="tab-pane fade" id="emp_address">
+
+                            <div formGroupName="AddressDetails" class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="col-form-label">AddressType</label>
+                                        <select class="select form-control"
+                                            [class.invalid]="addEmployeeForm.get('AddressDetails.AddressType').invalid && addEmployeeForm.get('AddressDetails.AddressType').touched"
+                                            formControlName="AddressType">
+                                            <option value="">-- Select --</option>
+                                            <option value="10000">Home</option>
+                                            <option value="10001">Work</option>
+                                        </select>
+                                        <!-- <div
+                                        *ngIf="addEmployeeForm.get('Gender').invalid && addEmployeeForm.get('Gender').touched">
+                                        <small
+                                            *ngIf="addEmployeeForm.get('Gender').invalid && addEmployeeForm.get('Gender').touched"
+                                            class="text-danger"> Gender Name required</small>
+                                    </div> -->
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="col-form-label"> Address1 </label>
+                                        <input class="form-control" type="text"
+                                            [class.invalid]="addEmployeeForm.get('AddressDetails.Address1').invalid && addEmployeeForm.get('AddressDetails.Address1').touched"
+                                            formControlName="Address1">
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="col-form-label"> Address2 </label>
+                                        <input class="form-control" type="text"
+                                            [class.invalid]="addEmployeeForm.get('AddressDetails.Address2').invalid && addEmployeeForm.get('AddressDetails.Address2').touched"
+                                            formControlName="Address2">
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="col-form-label"> Street </label>
+                                        <input class="form-control" type="text"
+                                            [class.invalid]="addEmployeeForm.get('AddressDetails.Street').invalid && addEmployeeForm.get('AddressDetails.Street').touched"
+                                            formControlName="Street">
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="col-form-label"> City </label>
+                                        <input class="form-control" type="text"
+                                            [class.invalid]="addEmployeeForm.get('AddressDetails.City').invalid && addEmployeeForm.get('AddressDetails.City').touched"
+                                            formControlName="City">
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="col-form-label"> district </label>
+                                        <input class="form-control" type="text"
+                                            [class.invalid]="addEmployeeForm.get('AddressDetails.district').invalid && addEmployeeForm.get('AddressDetails.district').touched"
+                                            formControlName="district">
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+                        </div>
+
+                        <div class="tab-pane fade" id="emp_iqama">
+
+                            <div formGroupName="IqamaDetails" class="row">
+
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="col-form-label"> IqamaId </label>
+                                        <input class="form-control" type="text"
+                                            [class.invalid]="addEmployeeForm.get('IqamaDetails.IqamaId').invalid && addEmployeeForm.get('IqamaDetails.IqamaId').touched"
+                                            formControlName="IqamaId">
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="col-form-label"> BoarderNo </label>
+                                        <input class="form-control" type="text"
+                                            [class.invalid]="addEmployeeForm.get('IqamaDetails.BoarderNo').invalid && addEmployeeForm.get('IqamaDetails.BoarderNo').touched"
+                                            formControlName="BoarderNo">
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="col-form-label"> Is Iqama Expired ? </label>
+                                        <input class="form-control" type="text"
+                                            [class.invalid]="addEmployeeForm.get('IqamaDetails.IsIqamaExpired').invalid && addEmployeeForm.get('IqamaDetails.IsIqamaExpired').touched"
+                                            formControlName="IsIqamaExpired">
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="col-form-label"> Date Of Expiry </label>
+                                        <div class="cal-icon">
+
+                                            <input class="form-control datetimepicker" type="text" bsDatepicker
+                                                [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY',  returnFocusToInput: true }"
+                                                formControlName="DateOfExpiry">
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="tab-pane fade" id="emp_passport">
+
+                            <div formGroupName="PassportDetails" class="row">
+
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="col-form-label"> Passport Number </label>
+                                        <input class="form-control" type="text"
+                                            [class.invalid]="addEmployeeForm.get('PassportDetails.PassportNumber').invalid && addEmployeeForm.get('PassportDetails.PassportNumber').touched"
+                                            formControlName="PassportNumber">
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="col-form-label"> Passport Number </label>
+                                        <input class="form-control" type="text"
+                                            [class.invalid]="addEmployeeForm.get('PassportDetails.PlaceOfIssue').invalid && addEmployeeForm.get('PassportDetails.PlaceOfIssue').touched"
+                                            formControlName="PlaceOfIssue">
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="col-form-label"> Issue Date </label>
+                                        <div class="cal-icon">
+
+                                            <input class="form-control datetimepicker" type="text" bsDatepicker
+                                                [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY',  returnFocusToInput: true }"
+                                                formControlName="IssueDate">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="col-form-label"> Date Of Expiry </label>
+                                        <div class="cal-icon">
+
+                                            <input class="form-control datetimepicker" type="text" bsDatepicker
+                                                [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY',  returnFocusToInput: true }"
+                                                formControlName="DateOfExpiry">
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+                        </div>
+
+                        <div class="tab-pane fade" id="emp_ecd">
+
+                            <div formGroupName="EmergencyContactDetails" class="row">
+
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="col-form-label"> Contact Name </label>
+                                        <input class="form-control" type="text"
+                                            [class.invalid]="addEmployeeForm.get('EmergencyContactDetails.ContactName').invalid && addEmployeeForm.get('EmergencyContactDetails.ContactName').touched"
+                                            formControlName="ContactName">
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="col-form-label">Relation</label>
+                                        <select class="select form-control"
+                                            [class.invalid]="addEmployeeForm.get('EmergencyContactDetails.Relation').invalid && addEmployeeForm.get('EmergencyContactDetails.Relation').touched"
+                                            formControlName="Relation">
+                                            <option value="">-- Select --</option>
+                                            <option value="10000">Wife</option>
+                                            <option value="10001">Sons</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="col-form-label"> Email </label>
+                                        <input class="form-control" type="text"
+                                            [class.invalid]="addEmployeeForm.get('EmergencyContactDetails.Email').invalid && addEmployeeForm.get('EmergencyContactDetails.Email').touched"
+                                            formControlName="Email">
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="col-form-label"> Contact No </label>
+                                        <input class="form-control" type="text"
+                                            [class.invalid]="addEmployeeForm.get('EmergencyContactDetails.ConatctNumber').invalid && addEmployeeForm.get('EmergencyContactDetails.ConatctNumber').touched"
+                                            formControlName="ConatctNumber">
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="tab-pane fade" id="emp_banking">
+
+                            <div formGroupName="BankingAndInsuranceDetails" class="row">
+
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="col-form-label"> BankAccountNo ( Payroll ) </label>
+                                        <input class="form-control" type="text"
+                                            [class.invalid]="addEmployeeForm.get('BankingAndInsuranceDetails.BankAccountNoPayroll').invalid && addEmployeeForm.get('BankingAndInsuranceDetails.BankAccountNoPayroll').touched"
+                                            formControlName="BankAccountNoPayroll">
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="col-form-label"> PersonalBankAccount </label>
+                                        <input class="form-control" type="text"
+                                            [class.invalid]="addEmployeeForm.get('BankingAndInsuranceDetails.PersonalBankAccount').invalid && addEmployeeForm.get('BankingAndInsuranceDetails.PersonalBankAccount').touched"
+                                            formControlName="PersonalBankAccount">
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="col-form-label"> InsuranceCoverage </label>
+                                        <input class="form-control" type="text"
+                                            [class.invalid]="addEmployeeForm.get('BankingAndInsuranceDetails.InsuranceCoverage').invalid && addEmployeeForm.get('BankingAndInsuranceDetails.InsuranceCoverage').touched"
+                                            formControlName="InsuranceCoverage">
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+                        </div>
+
+                        <div class="tab-pane fade" id="emp_salary">
+
+                            <div formGroupName="SalaryDetails" class="row">
+
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="col-form-label"> Total Salary </label>
+                                        <input class="form-control" type="text"
+                                            [class.invalid]="addEmployeeForm.get('SalaryDetails.TotalSalary').invalid && addEmployeeForm.get('SalaryDetails.TotalSalary').touched"
+                                            formControlName="TotalSalary">
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="col-form-label"> Basic Salary </label>
+                                        <input class="form-control" type="text"
+                                            [class.invalid]="addEmployeeForm.get('SalaryDetails.BasicSalary').invalid && addEmployeeForm.get('SalaryDetails.BasicSalary').touched"
+                                            formControlName="BasicSalary">
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="col-form-label"> Hosusing Alloawance </label>
+                                        <input class="form-control" type="text"
+                                            [class.invalid]="addEmployeeForm.get('SalaryDetails.HosusingAlloawance').invalid && addEmployeeForm.get('SalaryDetails.HosusingAlloawance').touched"
+                                            formControlName="HosusingAlloawance">
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="col-form-label"> Transport Alloawance </label>
+                                        <input class="form-control" type="text"
+                                            [class.invalid]="addEmployeeForm.get('SalaryDetails.TransportAlloawance').invalid && addEmployeeForm.get('SalaryDetails.TransportAlloawance').touched"
+                                            formControlName="TransportAlloawance">
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="col-form-label"> Deductions </label>
+                                        <input class="form-control" type="text"
+                                            [class.invalid]="addEmployeeForm.get('SalaryDetails.Deductions').invalid && addEmployeeForm.get('SalaryDetails.Deductions').touched"
+                                            formControlName="Deductions">
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="col-form-label"> Other Alloawances </label>
+                                        <input class="form-control" type="text"
+                                            [class.invalid]="addEmployeeForm.get('SalaryDetails.OtherAlloawances').invalid && addEmployeeForm.get('SalaryDetails.OtherAlloawances').touched"
+                                            formControlName="OtherAlloawances">
+                                    </div>
+                                </div>
+
+
+
+                            </div>
+
+                        </div>
+
+                        <div class="tab-pane fade" id="emp_activevacation">
+
+                            <div formGroupName="ActiveVacationDetails" class="row">
+
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="col-form-label">Vacation Type</label>
+                                        <select class="select form-control"
+                                            [class.invalid]="addEmployeeForm.get('ActiveVacationDetails.VacationType').invalid && addEmployeeForm.get('ActiveVacationDetails.VacationType').touched"
+                                            formControlName="VacationType">
+                                            <option value="">-- Select --</option>
+                                            <option value="10000">Annual</option>
+                                            <option value="10001">Sick Leave</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="col-form-label"> Date </label>
+                                        <div class="cal-icon">
+
+                                            <input class="form-control datetimepicker" type="text" bsDatepicker
+                                                [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY',  returnFocusToInput: true }"
+                                                formControlName="Date">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="col-form-label"> Vacation Start Date</label>
+                                        <div class="cal-icon">
+
+                                            <input class="form-control datetimepicker" type="text" bsDatepicker
+                                                [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY',  returnFocusToInput: true }"
+                                                formControlName="VacationStartDate">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="col-form-label"> Vacation End Date</label>
+                                        <div class="cal-icon">
+
+                                            <input class="form-control datetimepicker" type="text" bsDatepicker
+                                                [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY',  returnFocusToInput: true }"
+                                                formControlName="VacationEndDate">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="col-form-label"> Total Vacation Days </label>
+                                        <input class="form-control" type="text"
+                                            [class.invalid]="addEmployeeForm.get('ActiveVacationDetails.TotalVacationDays').invalid && addEmployeeForm.get('ActiveVacationDetails.TotalVacationDays').touched"
+                                            formControlName="TotalVacationDays">
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="col-form-label"> Notes </label>
+                                        <input class="form-control" type="text"
+                                            [class.invalid]="addEmployeeForm.get('ActiveVacationDetails.Notes').invalid && addEmployeeForm.get('ActiveVacationDetails.Notes').touched"
+                                            formControlName="Notes">
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="tab-pane fade" id="emp_vacation">
+
+                            <div formGroupName="VacationDetails" class="row">
+
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="col-form-label"> Vacation Balance </label>
+                                        <input class="form-control" type="text"
+                                            [class.invalid]="addEmployeeForm.get('VacationDetails.VacationBalance').invalid && addEmployeeForm.get('VacationDetails.VacationBalance').touched"
+                                            formControlName="VacationBalance">
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="col-form-label"> Last Vacation Date </label>
+                                        <div class="cal-icon">
+
+                                            <input class="form-control datetimepicker" type="text" bsDatepicker
+                                                [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY',  returnFocusToInput: true }"
+                                                formControlName="LastVacationDate">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="col-form-label"> Last Resumption Date</label>
+                                        <div class="cal-icon">
+
+                                            <input class="form-control datetimepicker" type="text" bsDatepicker
+                                                [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY',  returnFocusToInput: true }"
+                                                formControlName="LastResumptionDate">
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="submit-section">
+                        <button class="btn btn-primary submit-btn" type="submit">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /Add Employee Modal -->
+
+<!-- Edit Employee Modal -->
+<div id="edit_employee" class="modal custom-modal fade" role="dialog">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Edit Employee</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form (ngSubmit)="editEmployee()" [formGroup]="editEmployeeForm">
+
+                    <div class="row">
+                        <div class="card tab-box">
+                            <div class="row user-tabs">
+                                <div class="col-lg-12 col-md-12 col-sm-12 nav-tabs">
+                                    <ul class="nav nav-tabs nav-tabs-bottom">
+                                        <li class="nav-item"><a href="#emp_profile1" data-toggle="tab"
+                                                class="nav-link active"> Basic Details</a></li>
+                                        <li class="nav-item"><a href="#emp_company1" data-toggle="tab" class="nav-link">
+                                                Company</a></li>
+                                        <li class="nav-item"><a href="#emp_address1" data-toggle="tab" class="nav-link">
+                                                Address</a></li>
+                                        <li class="nav-item"><a href="#emp_iqama1" data-toggle="tab"
+                                                class="nav-link">Iqama</a></li>
+                                        <li class="nav-item"><a href="#emp_passport1" data-toggle="tab"
+                                                class="nav-link">Passport</a></li>
+                                        <li class="nav-item"><a href="#emp_ecd1" data-toggle="tab"
+                                                class="nav-link">Emergency Contacts</a></li>
+                                        <li class="nav-item"><a href="#emp_banking1" data-toggle="tab"
+                                                class="nav-link">Banking & Insurance</a></li>
+                                        <li class="nav-item"><a href="#emp_salary1" data-toggle="tab"
+                                                class="nav-link">Salary</a></li>
+                                        <li class="nav-item"><a href="#emp_activevacation1" data-toggle="tab"
+                                                class="nav-link">Active Vacation</a></li>
+
+                                        <li class="nav-item"><a href="#emp_vacation1" data-toggle="tab"
+                                                class="nav-link">Vacation</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tab-content">
+                        <div id="emp_profile1" class="pro-overview tab-pane fade show active">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="col-form-label">Company</label>
+                                        <select class="select form-control"
+                                            [class.invalid]="editEmployeeForm.get('CompanyName').invalid && editEmployeeForm.get('CompanyName').touched"
+                                            formControlName="CompanyName">
+                                            <option value="">-- Select --</option>
+                                            <option value="10000">Dyaft Mudun</option>
+                                            <option value="10001">Mudun Investement</option>
+                                        </select>
+                                        <div
+                                            *ngIf="editEmployeeForm.get('CompanyName').invalid && editEmployeeForm.get('CompanyName').touched">
+                                            <small
+                                                *ngIf="editEmployeeForm.get('CompanyName').invalid && editEmployeeForm.get('CompanyName').touched"
+                                                class="text-danger"> Company Name required</small>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="col-form-label"> Name <span class="text-danger">*</span></label>
+                                        <input class="form-control" type="text"
+                                            [class.invalid]="editEmployeeForm.get('Name').invalid && editEmployeeForm.get('Name').touched"
+                                            formControlName="Name">
+                                        <div
+                                            *ngIf="editEmployeeForm.get('Name').invalid && editEmployeeForm.get('Name').touched">
+                                            <small
+                                                *ngIf="editEmployeeForm.get('Name').invalid && editEmployeeForm.get('Name').touched"
+                                                class="text-danger"> *Name is required</small>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="col-form-label"> Employee Code <span
+                                                class="text-danger">*</span></label>
+                                        <input class="form-control" type="text"
+                                            [class.invalid]="editEmployeeForm.get('EmployeeCode').invalid && editEmployeeForm.get('EmployeeCode').touched"
+                                            formControlName="EmployeeCode">
+                                        <div
+                                            *ngIf="editEmployeeForm.get('EmployeeCode').invalid && editEmployeeForm.get('EmployeeCode').touched">
+                                            <small
+                                                *ngIf="editEmployeeForm.get('EmployeeCode').invalid && editEmployeeForm.get('EmployeeCode').touched"
+                                                class="text-danger"> *Employee Code is required</small>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="col-form-label">Gender</label>
+                                        <select class="select form-control"
+                                            [class.invalid]="editEmployeeForm.get('Gender').invalid && editEmployeeForm.get('Gender').touched"
+                                            formControlName="Gender">
+                                            <option value="">-- Select --</option>
+                                            <option value="10000">Male</option>
+                                            <option value="10001">Female</option>
+                                        </select>
+                                        <!-- <div
+                                    *ngIf="editEmployeeForm.get('Gender').invalid && editEmployeeForm.get('Gender').touched">
+                                    <small
+                                        *ngIf="editEmployeeForm.get('Gender').invalid && editEmployeeForm.get('Gender').touched"
+                                        class="text-danger"> Gender Name required</small>
+                                </div> -->
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="col-form-label">Birth Date </label>
+                                        <div class="cal-icon">
+
+                                            <input class="form-control datetimepicker" type="text" bsDatepicker
+                                                [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY',  returnFocusToInput: true }"
+                                                formControlName="BirthDate">
+                                            <!-- <div
+                                                *ngIf="editEmployeeForm.get('BirthDate').invalid && editEmployeeForm.get('BirthDate').touched">
+                                                <small
+                                                    *ngIf="editEmployeeForm.get('BirthDate').invalid && editEmployeeForm.get('BirthDate').touched"
+                                                    class="text-danger"> *Birth Date is required</small>
+                                            </div> -->
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="col-form-label">Mobile No </label>
+                                        <input class="form-control" type="text"
+                                            [class.invalid]="editEmployeeForm.get('MobileNo').invalid && editEmployeeForm.get('MobileNo').touched"
+                                            formControlName="MobileNo">
+                                        <!-- <div
+                                    *ngIf="editEmployeeForm.get('MobileNo').invalid && editEmployeeForm.get('MobileNo').touched">
+                                    <small
+                                        *ngIf="editEmployeeForm.get('MobileNo').invalid && editEmployeeForm.get('MobileNo').touched"
+                                        class="text-danger"> *Mobile No is required</small>
+                                </div> -->
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="col-form-label">Email </label>
+                                        <input class="form-control" type="Email"
+                                            [class.invalid]="editEmployeeForm.get('EmailId').invalid && editEmployeeForm.get('EmailId').touched"
+                                            formControlName="EmailId">
+                                        <!-- <div
+                                    *ngIf="editEmployeeForm.get('EmailId').invalid && editEmployeeForm.get('EmailId').touched">
+                                    <small
+                                        *ngIf="editEmployeeForm.get('EmailId').invalid && editEmployeeForm.get('EmailId').touched"
+                                        class="text-danger"> *Email is required</small>
+                                </div> -->
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="col-form-label">Blood Group </label>
+                                        <input class="form-control" type="BloodGroup"
+                                            [class.invalid]="editEmployeeForm.get('BloodGroup').invalid && editEmployeeForm.get('BloodGroup').touched"
+                                            formControlName="BloodGroup">
+                                        <!-- <div
+                                    *ngIf="editEmployeeForm.get('BloodGroup').invalid && editEmployeeForm.get('BloodGroup').touched">
+                                    <small
+                                        *ngIf="editEmployeeForm.get('BloodGroup').invalid && editEmployeeForm.get('BloodGroup').touched"
+                                        class="text-danger"> *BloodGroup is required</small>
+                                </div> -->
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="col-form-label">Nationality</label>
+                                        <select class="select form-control"
+                                            [class.invalid]="editEmployeeForm.get('Nationality').invalid && editEmployeeForm.get('Nationality').touched"
+                                            formControlName="Nationality">
+                                            <option value="">-- Select --</option>
+                                            <option value="10000">Arabic</option>
+                                            <option value="10001">Pakistani</option>
+                                        </select>
+                                        <!-- <div
+                                    *ngIf="editEmployeeForm.get('Gender').invalid && editEmployeeForm.get('Gender').touched">
+                                    <small
+                                        *ngIf="editEmployeeForm.get('Gender').invalid && editEmployeeForm.get('Gender').touched"
+                                        class="text-danger"> Gender Name required</small>
+                                </div> -->
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="col-form-label">No Of Dependants </label>
+                                        <input class="form-control" type="text"
+                                            [class.invalid]="editEmployeeForm.get('BloodGroup').invalid && editEmployeeForm.get('NoOfDependants').touched"
+                                            formControlName="NoOfDependants">
+                                        <!-- <div
+                                    *ngIf="editEmployeeForm.get('NoOfDependants').invalid && editEmployeeForm.get('NoOfDependants').touched">
+                                    <small
+                                        *ngIf="editEmployeeForm.get('NoOfDependants').invalid && editEmployeeForm.get('NoOfDependants').touched"
+                                        class="text-danger"> *NoOfDependants is required</small>
+                                </div> -->
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="col-form-label">Status</label>
+                                        <select class="select form-control"
+                                            [class.invalid]="editEmployeeForm.get('Status').invalid && editEmployeeForm.get('Status').touched"
+                                            formControlName="Status">
+                                            <option value="">-- Select --</option>
+                                            <option value="10000">Single</option>
+                                            <option value="10001">Married</option>
+                                        </select>
+                                        <!-- <div
+                                    *ngIf="editEmployeeForm.get('Gender').invalid && editEmployeeForm.get('Gender').touched">
+                                    <small
+                                        *ngIf="editEmployeeForm.get('Gender').invalid && editEmployeeForm.get('Gender').touched"
+                                        class="text-danger"> Gender Name required</small>
+                                </div> -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="tab-pane fade" id="emp_company1">
+                            <div formGroupName="CompanyDetails" class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="col-form-label">Company</label>
+                                        <select class="select form-control"
+                                            [class.invalid]="editEmployeeForm.get('CompanyDetails.CompanyName').invalid && editEmployeeForm.get('CompanyDetails.CompanyName').touched"
+                                            formControlName="CompanyName">
+                                            <option value="">-- Select --</option>
+                                            <option value="10000">Dyaft Mudun</option>
+                                            <option value="10001">Mudun Investement</option>
+                                        </select>
+                                        <div
+                                            *ngIf="editEmployeeForm.get('CompanyDetails.CompanyName').invalid && editEmployeeForm.get('CompanyDetails.CompanyName').touched">
+                                            <small
+                                                *ngIf="editEmployeeForm.get('CompanyDetails.CompanyName').invalid && editEmployeeForm.get('CompanyDetails.CompanyName').touched"
+                                                class="text-danger"> Company Name required</small>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <div class="form-group">
+                                            <label class="col-form-label">Company No </label>
+                                            <input class="form-control" type="text"
+                                                [class.invalid]="editEmployeeForm.get('CompanyDetails.CompanyNo').invalid && editEmployeeForm.get('CompanyDetails.CompanyNo').touched"
+                                                formControlName="CompanyNo">
+                                            <!-- <div
+                                            *ngIf="editEmployeeForm.get('NoOfDependants').invalid && editEmployeeForm.get('NoOfDependants').touched">
+                                            <small
+                                                *ngIf="editEmployeeForm.get('NoOfDependants').invalid && editEmployeeForm.get('NoOfDependants').touched"
+                                                class="text-danger"> *NoOfDependants is required</small>
+                                        </div> -->
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="col-form-label">Position </label>
+                                        <input class="form-control" type="text"
+                                            [class.invalid]="editEmployeeForm.get('CompanyDetails.Position').invalid && editEmployeeForm.get('CompanyDetails.Position').touched"
+                                            formControlName="Position">
+                                        <!-- <div
+                                            *ngIf="editEmployeeForm.get('NoOfDependants').invalid && editEmployeeForm.get('NoOfDependants').touched">
+                                            <small
+                                                *ngIf="editEmployeeForm.get('NoOfDependants').invalid && editEmployeeForm.get('NoOfDependants').touched"
+                                                class="text-danger"> *NoOfDependants is required</small>
+                                        </div> -->
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="col-form-label">Entry Date </label>
+                                        <div class="cal-icon">
+
+                                            <input class="form-control datetimepicker" type="text" bsDatepicker
+                                                [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY',  returnFocusToInput: true }"
+                                                formControlName="EntryDate">
+                                            <!-- <div
+                                                *ngIf="editEmployeeForm.get('CompanyDetails.EntryDate').invalid && editEmployeeForm.get('CompanyDetails.EntryDate').touched">
+                                                <small
+                                                    *ngIf="editEmployeeForm.get('CompanyDetails.EntryDate').invalid && editEmployeeForm.get('CompanyDetails.EntryDate').touched"
+                                                    class="text-danger"> *Entry Date is required</small>
+                                            </div> -->
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="col-form-label">Hiring Date </label>
+                                        <div class="cal-icon">
+
+                                            <input class="form-control datetimepicker" type="text" bsDatepicker
+                                                [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY',  returnFocusToInput: true }"
+                                                formControlName="HiringDate">
+                                            <!-- <div
+                                                *ngIf="editEmployeeForm.get('CompanyDetails.EntryDate').invalid && editEmployeeForm.get('CompanyDetails.EntryDate').touched">
+                                                <small
+                                                    *ngIf="editEmployeeForm.get('CompanyDetails.EntryDate').invalid && editEmployeeForm.get('CompanyDetails.EntryDate').touched"
+                                                    class="text-danger"> *Entry Date is required</small>
+                                            </div> -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="tab-pane fade" id="emp_address1">
+
+                            <div formGroupName="AddressDetails" class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="col-form-label">AddressType</label>
+                                        <select class="select form-control"
+                                            [class.invalid]="editEmployeeForm.get('AddressDetails.AddressType').invalid && editEmployeeForm.get('AddressDetails.AddressType').touched"
+                                            formControlName="AddressType">
+                                            <option value="">-- Select --</option>
+                                            <option value="10000">Home</option>
+                                            <option value="10001">Work</option>
+                                        </select>
+                                        <!-- <div
+                                        *ngIf="editEmployeeForm.get('Gender').invalid && editEmployeeForm.get('Gender').touched">
+                                        <small
+                                            *ngIf="editEmployeeForm.get('Gender').invalid && editEmployeeForm.get('Gender').touched"
+                                            class="text-danger"> Gender Name required</small>
+                                    </div> -->
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="col-form-label"> Address1 </label>
+                                        <input class="form-control" type="text"
+                                            [class.invalid]="editEmployeeForm.get('AddressDetails.Address1').invalid && editEmployeeForm.get('AddressDetails.Address1').touched"
+                                            formControlName="Address1">
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="col-form-label"> Address2 </label>
+                                        <input class="form-control" type="text"
+                                            [class.invalid]="editEmployeeForm.get('AddressDetails.Address2').invalid && editEmployeeForm.get('AddressDetails.Address2').touched"
+                                            formControlName="Address2">
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="col-form-label"> Street </label>
+                                        <input class="form-control" type="text"
+                                            [class.invalid]="editEmployeeForm.get('AddressDetails.Street').invalid && editEmployeeForm.get('AddressDetails.Street').touched"
+                                            formControlName="Street">
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="col-form-label"> City </label>
+                                        <input class="form-control" type="text"
+                                            [class.invalid]="editEmployeeForm.get('AddressDetails.City').invalid && editEmployeeForm.get('AddressDetails.City').touched"
+                                            formControlName="City">
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="col-form-label"> district </label>
+                                        <input class="form-control" type="text"
+                                            [class.invalid]="editEmployeeForm.get('AddressDetails.district').invalid && editEmployeeForm.get('AddressDetails.district').touched"
+                                            formControlName="district">
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+                        </div>
+
+                        <div class="tab-pane fade" id="emp_iqama1">
+
+                            <div formGroupName="IqamaDetails" class="row">
+
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="col-form-label"> IqamaId </label>
+                                        <input class="form-control" type="text"
+                                            [class.invalid]="editEmployeeForm.get('IqamaDetails.IqamaId').invalid && editEmployeeForm.get('IqamaDetails.IqamaId').touched"
+                                            formControlName="IqamaId">
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="col-form-label"> BoarderNo </label>
+                                        <input class="form-control" type="text"
+                                            [class.invalid]="editEmployeeForm.get('IqamaDetails.BoarderNo').invalid && editEmployeeForm.get('IqamaDetails.BoarderNo').touched"
+                                            formControlName="BoarderNo">
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="col-form-label"> Is Iqama Expired ? </label>
+                                        <input class="form-control" type="text"
+                                            [class.invalid]="editEmployeeForm.get('IqamaDetails.IsIqamaExpired').invalid && editEmployeeForm.get('IqamaDetails.IsIqamaExpired').touched"
+                                            formControlName="IsIqamaExpired">
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="col-form-label"> Date Of Expiry </label>
+                                        <div class="cal-icon">
+
+                                            <input class="form-control datetimepicker" type="text" bsDatepicker
+                                                [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY',  returnFocusToInput: true }"
+                                                formControlName="DateOfExpiry">
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="tab-pane fade" id="emp_passport1">
+
+                            <div formGroupName="PassportDetails" class="row">
+
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="col-form-label"> Passport Number </label>
+                                        <input class="form-control" type="text"
+                                            [class.invalid]="editEmployeeForm.get('PassportDetails.PassportNumber').invalid && editEmployeeForm.get('PassportDetails.PassportNumber').touched"
+                                            formControlName="PassportNumber">
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="col-form-label"> Passport Number </label>
+                                        <input class="form-control" type="text"
+                                            [class.invalid]="editEmployeeForm.get('PassportDetails.PlaceOfIssue').invalid && editEmployeeForm.get('PassportDetails.PlaceOfIssue').touched"
+                                            formControlName="PlaceOfIssue">
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="col-form-label"> Issue Date </label>
+                                        <div class="cal-icon">
+
+                                            <input class="form-control datetimepicker" type="text" bsDatepicker
+                                                [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY',  returnFocusToInput: true }"
+                                                formControlName="IssueDate">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="col-form-label"> Date Of Expiry </label>
+                                        <div class="cal-icon">
+
+                                            <input class="form-control datetimepicker" type="text" bsDatepicker
+                                                [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY',  returnFocusToInput: true }"
+                                                formControlName="DateOfExpiry">
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+                        </div>
+
+                        <div class="tab-pane fade" id="emp_ecd1">
+
+                            <div formGroupName="EmergencyContactDetails" class="row">
+
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="col-form-label"> Contact Name </label>
+                                        <input class="form-control" type="text"
+                                            [class.invalid]="editEmployeeForm.get('EmergencyContactDetails.ContactName').invalid && editEmployeeForm.get('EmergencyContactDetails.ContactName').touched"
+                                            formControlName="ContactName">
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="col-form-label">Relation</label>
+                                        <select class="select form-control"
+                                            [class.invalid]="editEmployeeForm.get('EmergencyContactDetails.Relation').invalid && editEmployeeForm.get('EmergencyContactDetails.Relation').touched"
+                                            formControlName="Relation">
+                                            <option value="">-- Select --</option>
+                                            <option value="10000">Wife</option>
+                                            <option value="10001">Sons</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="col-form-label"> Email </label>
+                                        <input class="form-control" type="text"
+                                            [class.invalid]="editEmployeeForm.get('EmergencyContactDetails.Email').invalid && editEmployeeForm.get('EmergencyContactDetails.Email').touched"
+                                            formControlName="Email">
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="col-form-label"> Contact No </label>
+                                        <input class="form-control" type="text"
+                                            [class.invalid]="editEmployeeForm.get('EmergencyContactDetails.ConatctNumber').invalid && editEmployeeForm.get('EmergencyContactDetails.ConatctNumber').touched"
+                                            formControlName="ConatctNumber">
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="tab-pane fade" id="emp_banking1">
+
+                            <div formGroupName="BankingAndInsuranceDetails" class="row">
+
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="col-form-label"> BankAccountNo ( Payroll ) </label>
+                                        <input class="form-control" type="text"
+                                            [class.invalid]="editEmployeeForm.get('BankingAndInsuranceDetails.BankAccountNoPayroll').invalid && editEmployeeForm.get('BankingAndInsuranceDetails.BankAccountNoPayroll').touched"
+                                            formControlName="BankAccountNoPayroll">
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="col-form-label"> PersonalBankAccount </label>
+                                        <input class="form-control" type="text"
+                                            [class.invalid]="editEmployeeForm.get('BankingAndInsuranceDetails.PersonalBankAccount').invalid && editEmployeeForm.get('BankingAndInsuranceDetails.PersonalBankAccount').touched"
+                                            formControlName="PersonalBankAccount">
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="col-form-label"> InsuranceCoverage </label>
+                                        <input class="form-control" type="text"
+                                            [class.invalid]="editEmployeeForm.get('BankingAndInsuranceDetails.InsuranceCoverage').invalid && editEmployeeForm.get('BankingAndInsuranceDetails.InsuranceCoverage').touched"
+                                            formControlName="InsuranceCoverage">
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+                        </div>
+
+                        <div class="tab-pane fade" id="emp_salary1">
+
+                            <div formGroupName="SalaryDetails" class="row">
+
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="col-form-label"> Total Salary </label>
+                                        <input class="form-control" type="text"
+                                            [class.invalid]="editEmployeeForm.get('SalaryDetails.TotalSalary').invalid && editEmployeeForm.get('SalaryDetails.TotalSalary').touched"
+                                            formControlName="TotalSalary">
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="col-form-label"> Basic Salary </label>
+                                        <input class="form-control" type="text"
+                                            [class.invalid]="editEmployeeForm.get('SalaryDetails.BasicSalary').invalid && editEmployeeForm.get('SalaryDetails.BasicSalary').touched"
+                                            formControlName="BasicSalary">
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="col-form-label"> Hosusing Alloawance </label>
+                                        <input class="form-control" type="text"
+                                            [class.invalid]="editEmployeeForm.get('SalaryDetails.HosusingAlloawance').invalid && editEmployeeForm.get('SalaryDetails.HosusingAlloawance').touched"
+                                            formControlName="HosusingAlloawance">
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="col-form-label"> Transport Alloawance </label>
+                                        <input class="form-control" type="text"
+                                            [class.invalid]="editEmployeeForm.get('SalaryDetails.TransportAlloawance').invalid && editEmployeeForm.get('SalaryDetails.TransportAlloawance').touched"
+                                            formControlName="TransportAlloawance">
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="col-form-label"> Deductions </label>
+                                        <input class="form-control" type="text"
+                                            [class.invalid]="editEmployeeForm.get('SalaryDetails.Deductions').invalid && editEmployeeForm.get('SalaryDetails.Deductions').touched"
+                                            formControlName="Deductions">
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="col-form-label"> Other Alloawances </label>
+                                        <input class="form-control" type="text"
+                                            [class.invalid]="editEmployeeForm.get('SalaryDetails.OtherAlloawances').invalid && editEmployeeForm.get('SalaryDetails.OtherAlloawances').touched"
+                                            formControlName="OtherAlloawances">
+                                    </div>
+                                </div>
+
+
+
+                            </div>
+
+                        </div>
+
+                        <div class="tab-pane fade" id="emp_activevacation1">
+
+                            <div formGroupName="ActiveVacationDetails" class="row">
+
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="col-form-label">Vacation Type</label>
+                                        <select class="select form-control"
+                                            [class.invalid]="editEmployeeForm.get('ActiveVacationDetails.VacationType').invalid && editEmployeeForm.get('ActiveVacationDetails.VacationType').touched"
+                                            formControlName="VacationType">
+                                            <option value="">-- Select --</option>
+                                            <option value="10000">Annual</option>
+                                            <option value="10001">Sick Leave</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="col-form-label"> Date </label>
+                                        <div class="cal-icon">
+
+                                            <input class="form-control datetimepicker" type="text" bsDatepicker
+                                                [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY',  returnFocusToInput: true }"
+                                                formControlName="Date">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="col-form-label"> Vacation Start Date</label>
+                                        <div class="cal-icon">
+
+                                            <input class="form-control datetimepicker" type="text" bsDatepicker
+                                                [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY',  returnFocusToInput: true }"
+                                                formControlName="VacationStartDate">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="col-form-label"> Vacation End Date</label>
+                                        <div class="cal-icon">
+
+                                            <input class="form-control datetimepicker" type="text" bsDatepicker
+                                                [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY',  returnFocusToInput: true }"
+                                                formControlName="VacationEndDate">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="col-form-label"> Total Vacation Days </label>
+                                        <input class="form-control" type="text"
+                                            [class.invalid]="editEmployeeForm.get('ActiveVacationDetails.TotalVacationDays').invalid && editEmployeeForm.get('ActiveVacationDetails.TotalVacationDays').touched"
+                                            formControlName="TotalVacationDays">
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="col-form-label"> Notes </label>
+                                        <input class="form-control" type="text"
+                                            [class.invalid]="editEmployeeForm.get('ActiveVacationDetails.Notes').invalid && editEmployeeForm.get('ActiveVacationDetails.Notes').touched"
+                                            formControlName="Notes">
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="tab-pane fade" id="emp_vacation1">
+
+                            <div formGroupName="VacationDetails" class="row">
+
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="col-form-label"> Vacation Balance </label>
+                                        <input class="form-control" type="text"
+                                            [class.invalid]="editEmployeeForm.get('VacationDetails.VacationBalance').invalid && editEmployeeForm.get('VacationDetails.VacationBalance').touched"
+                                            formControlName="VacationBalance">
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="col-form-label"> Last Vacation Date </label>
+                                        <div class="cal-icon">
+
+                                            <input class="form-control datetimepicker" type="text" bsDatepicker
+                                                [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY',  returnFocusToInput: true }"
+                                                formControlName="LastVacationDate">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="col-form-label"> Last Resumption Date</label>
+                                        <div class="cal-icon">
+
+                                            <input class="form-control datetimepicker" type="text" bsDatepicker
+                                                [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY',  returnFocusToInput: true }"
+                                                formControlName="LastResumptionDate">
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="submit-section">
+                        <button class="btn btn-primary submit-btn" type="submit">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /Edit Employee Modal -->
+
+<!-- Delete Employee Modal -->
+<div class="modal custom-modal fade" id="delete_employee" role="dialog">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="form-header">
+                    <h3>Delete Employee</h3>
+                    <p>Are you sure want to delete?</p>
+                </div>
+                <div class="modal-btn delete-action">
+                    <div class="row">
+                        <div class="col-6">
+                            <a class="btn btn-primary continue-btn" (click)="deleteEmployee()">Delete</a>
+                        </div>
+                        <div class="col-6">
+                            <a data-dismiss="modal" class="btn btn-primary cancel-btn">Cancel</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /Delete Employee Modal -->
