@@ -29,7 +29,7 @@ const routes: Routes = [
         component: EmployeeListComponent
       },
       {
-        path: 'employeeprofile',
+        path: 'employeeprofile/:id',
         component: EmployeeProfileComponent
       },
       {

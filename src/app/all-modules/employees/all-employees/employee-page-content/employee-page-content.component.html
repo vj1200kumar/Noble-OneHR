@@ -61,7 +61,7 @@
         <div class="col-md-4 col-sm-6 col-12 col-lg-4 col-xl-3" *ngFor="let emp of lstEmployee;let i = index">
             <div class="profile-widget">
                 <div class="profile-img">
-                    <a routerLink="/employees/employeeprofile" class="avatar"><img
+                    <a routerLink="/employees/employeeprofile/{{emp.Id}}" class="avatar"><img
                             src="assets/img/profiles/avatar-0{{i+ 1}}.jpg" alt=""></a>
                 </div>
                 <div class="dropdown profile-action">
