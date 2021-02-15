@@ -60,18 +60,18 @@
     <div class="row staff-grid-row">
         <div class="col-md-4 col-sm-6 col-12 col-lg-4 col-xl-3" *ngFor="let emp of lstEmployee;let i = index">
             <div class="profile-widget">
-                <div class="profile-img">
-                    <a routerLink="/employees/employeeprofile/{{emp.Id}}" class="avatar"><img
-                            src="assets/img/profiles/avatar-0{{i+ 1}}.jpg" alt=""></a>
+                <div class="profile-img" routerLink="/employees/employeeprofile/{{emp.Id}}">
+                    <div>{{emp.Name}}</div>
+                    <div>{{emp?.CompanyDetails?.CompanyName}}</div>
                 </div>
                 <div class="dropdown profile-action">
                     <a class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i
                             class="material-icons">more_vert</i></a>
                     <div class="dropdown-menu dropdown-menu-right">
                         <a class="dropdown-item" data-toggle="modal" data-target="#edit_employee"
-                            (click)="editEmp(emp.id)"><i class="fa fa-pencil m-r-5"></i> Edit</a>
+                            (click)="editEmp(emp.Id)"><i class="fa fa-pencil m-r-5"></i> Edit</a>
                         <a class="dropdown-item" data-toggle="modal" data-target="#delete_employee"
-                            (click)="tempId = emp.id"><i class="fa fa-trash-o m-r-5"></i> Delete</a>
+                            (click)="tempId = emp.Id"><i class="fa fa-trash-o m-r-5"></i> Delete</a>
                     </div>
                 </div>
                 <h4 class="user-name m-t-10 mb-0 text-ellipsis"><a

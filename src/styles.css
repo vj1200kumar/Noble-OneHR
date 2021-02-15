@@ -252,6 +252,7 @@ textarea.form-control {
 	text-rendering: optimizeLegibility;
 	-moz-osx-font-smoothing: grayscale;
 	font-feature-settings: 'liga';
+	cursor: pointer;
 }
 .input-group-text {
 	background-color: #f7f7f7;
@@ -3045,7 +3046,7 @@ table.dataTable thead > tr > td.sorting {
 	height: 80px;
 	margin: 0 auto;
 	position: relative;
-	width: 80px;
+	width: 150px;
 }
 .profile-img .avatar {
 	font-size: 24px;

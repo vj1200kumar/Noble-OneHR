@@ -262,23 +262,82 @@ export class EmployeePageContentComponent implements OnInit {
   editEmp(value) {
     this.editId = value;
     const index = this.lstEmployee.findIndex((item) => {
-      return item.id === value;
+      return item.Id === value;
     });
     let toSetValues = this.lstEmployee[index];
-    this.editEmployeeForm.setValue({
-      // FirstName: toSetValues.firstname,
-      // LastName: toSetValues.lastname,
-      // UserName: toSetValues.username,
-      // Email: toSetValues.email,
-      // Password: toSetValues.password,
-      // ConfirmPassword: toSetValues.confirmpassword,
-      // EmployeeID: toSetValues.employeeId,
-      // JoinDate: toSetValues.joindate,
-      // PhoneNumber: toSetValues.phone,
-      // CompanyName: toSetValues.company,
-      // DepartmentName: toSetValues.department,
-      // Designation: toSetValues.designation,
-    });
+    console.log('Employee Selected', toSetValues);
+    this.editEmployeeForm.setValue({      
+        CompanyName: toSetValues.CompanyDetails.CompanyName,
+        Name: toSetValues.Name,
+        EmployeeCode: toSetValues.EmployeeCode,
+        Gender: toSetValues.Gender.trim(),
+        BirthDate: toSetValues.BirthDate,
+        MobileNo: toSetValues.MobileNo,
+        EmailId: toSetValues.EmailId,
+        BloodGroup: toSetValues.BloodGroup,
+        Nationality: toSetValues.Nationality,
+        NoOfDependants: toSetValues.NoOfDependants,
+        Status: toSetValues.Status,
+        CompanyDetails: {
+          CompanyNo: toSetValues.CompanyDetails.CompanyNo,
+          CompanyName: toSetValues.CompanyDetails.CompanyName,
+          Position: toSetValues.CompanyDetails.Position,
+          EntryDate: toSetValues.CompanyDetails.EntryDate,
+          HiringDate: toSetValues.CompanyDetails.HiringDate,
+        },
+        AddressDetails: {
+          AddressType: toSetValues.AddressDetails.AddressType,
+          Address1: toSetValues.AddressDetails.Address1,
+          Address2: toSetValues.AddressDetails.Address2,
+          Street: toSetValues.AddressDetails.Street,
+          City: toSetValues.AddressDetails.City,
+          district: toSetValues.AddressDetails.District
+        },
+        IqamaDetails: {
+          IqamaId: toSetValues.IqamaDetails.IqamaId,
+          BoarderNo: toSetValues.IqamaDetails.BoarderNo,
+          IsIqamaExpired: toSetValues.IqamaDetails.IsIqamaExpired,
+          DateOfExpiry: toSetValues.IqamaDetails.DateOfExpiry
+        },
+        PassportDetails: {
+          PassportNumber: toSetValues.PassportDetails.PassportNumber,
+          PlaceOfIssue: toSetValues.PassportDetails.PlaceOfIssue,
+          IssueDate: toSetValues.PassportDetails.IssueDate,
+          DateOfExpiry: toSetValues.PassportDetails.DateOfExpiry
+        },
+        EmergencyContactDetails: {
+          ContactName: toSetValues.EmergencyContactDetails.ContactName,
+          Relation: toSetValues.EmergencyContactDetails.Relation,
+          Email: toSetValues.EmergencyContactDetails.Email,
+          ConatctNumber: toSetValues.EmergencyContactDetails.ConatctNumber
+        },
+        BankingAndInsuranceDetails: {
+          BankAccountNoPayroll: toSetValues.BankingAndInsuranceDetails.BankAccountNoPayroll,
+          PersonalBankAccount: toSetValues.BankingAndInsuranceDetails.PersonalBankAccount,
+          InsuranceCoverage: toSetValues.BankingAndInsuranceDetails.InsuranceCoverage
+        },
+        SalaryDetails: {
+          TotalSalary: toSetValues.SalaryDetails.TotalSalary,
+          BasicSalary: toSetValues.SalaryDetails.BasicSalary,
+          HosusingAllowances: toSetValues.SalaryDetails.HousingAllowance,
+          TransportAllowances: toSetValues.SalaryDetails.TransportaionAllowance,
+          Deductions: toSetValues.SalaryDetails.Deductions,
+          OtherAllowancess: toSetValues.SalaryDetails.OtherAllowances
+        },
+        ActiveVacationDetails: {
+          VacationType: toSetValues.ActiveVacationDetails.VacationType,
+          Date: toSetValues.ActiveVacationDetails.Date,
+          VacationStartDate: toSetValues.ActiveVacationDetails.VacationStartDate,
+          VacationEndDate: toSetValues.ActiveVacationDetails.VacationEndDate,
+          TotalVacationDays: toSetValues.ActiveVacationDetails.TotalVacationDays,
+          Notes: toSetValues.ActiveVacationDetails.Notes
+        },
+        VacationDetails: {
+          VacationBalance: toSetValues.VacationDetails.VacationBalance,
+          LastVacationDate: toSetValues.VacationDetails.LastVacationDate,
+          LastResumptionDate: toSetValues.VacationDetails.LastResumptionDate
+        }
+      });
   }
 
   // edit update data set
