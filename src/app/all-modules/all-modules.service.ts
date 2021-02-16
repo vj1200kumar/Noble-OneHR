@@ -11,7 +11,7 @@ import { Employee } from "../Models/employee";
 })
 export class AllModulesService {
   // Chats
-
+  apiEndPoint = 'https://onehr-employee-service.azurewebsites.net/api/employees';
   groups = {
     active: "",
     total: ["general", "video responsive survey", "500rs", "warehouse"],
@@ -50,13 +50,13 @@ export class AllModulesService {
     this.apiurl = `api/${type}`;
 
     return this.http
-      .get<Employee[]>("https://onehr-employee-service.azurewebsites.net/api/employees?code=Misb/EhYlskAxKeOQtibZr7ttHdH0FSrMyH/0TBB4zLKUcO0KVEJmw==")
+      .get<Employee[]>(this.apiEndPoint + "?code=Misb/EhYlskAxKeOQtibZr7ttHdH0FSrMyH/0TBB4zLKUcO0KVEJmw==")
       .pipe(tap(), catchError(this.handleError));
   }
 
   // Post Method Api
   add(user: any, type): Observable<any> {
-    this.apiurl = `https://onehr-employee-service.azurewebsites.net/api/employees?code=R0USqHH5Btohh0iqORO9c6VLTUzaOX6jtNp2onQaa6aasaZlrMRwFQ==`;
+    this.apiurl = this.apiEndPoint + `?code=R0USqHH5Btohh0iqORO9c6VLTUzaOX6jtNp2onQaa6aasaZlrMRwFQ==`;
     user.id = null;
     return this.http
       .post<any>(this.apiurl, user, this.httpOptions)
@@ -65,9 +65,9 @@ export class AllModulesService {
 
   // Update Method Api
   update(user: any, type): Observable<any> {
-    this.apiurl = `api/${type}`;
-    const url = `${this.apiurl}/${user.id}`;
-    return this.http.put<any>(url, user, this.httpOptions).pipe(
+    this.apiurl = this.apiEndPoint + `?code=NV2muqEhnX4fk0ZwDwZTr9xLHaeHWA6W6R2MW0dmWMR9Yj0cJghMVg==`;
+    // const url = `${this.apiurl}/${user.id}`;
+    return this.http.put<any>(this.apiurl, user, this.httpOptions).pipe(
       map(() => user),
       catchError(this.handleError)
     );
@@ -75,10 +75,10 @@ export class AllModulesService {
 
   // Delete Method Api
   delete(id: id, type): Observable<id> {
-    this.apiurl = `api/${type}`;
-    const url = `${this.apiurl}/${id}`;
+    this.apiurl = this.apiEndPoint + '/' + id + `?code=dat8AFitK41QOnMRKIBSjuDd5NUFjryGHZGiCxMR8/0nvE7Lp1Drdw==`;
+    // const url = `${this.apiurl}/${id}`;
     return this.http
-      .delete<id>(url, this.httpOptions)
+      .delete<id>(this.apiurl, this.httpOptions)
       .pipe(catchError(this.handleError));
   }
 }

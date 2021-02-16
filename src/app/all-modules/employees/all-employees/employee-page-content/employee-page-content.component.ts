@@ -108,6 +108,7 @@ export class EmployeePageContentComponent implements OnInit {
     });
 
     this.editEmployeeForm = this.formBuilder.group({
+      Id: [],
       CompanyName: ["", [Validators.required]],
       Name: ["", [Validators.required]],
       EmployeeCode: ["", [Validators.required]],
@@ -252,7 +253,14 @@ export class EmployeePageContentComponent implements OnInit {
       role: "Web developer",
       id: this.editId,
     };
-    this.srvModuleService.update(obj, this.url).subscribe((data1) => { });
+    let finalObj = this.editEmployeeForm.value;
+    finalObj.isActive = true
+    delete finalObj.BankingAndInsuranceDetails.InsuranceCoverage;
+    finalObj.IqamaDetails.IsIqamaExpired = false;
+    console.log('finalObj', finalObj);    
+    this.srvModuleService.update(finalObj, this.url).subscribe((data) => {
+      console.log('data', data);
+    });
     this.loadEmployee();
     $("#edit_employee").modal("hide");
     this.toastr.success("Employeee Updated sucessfully...!", "Success");
@@ -268,6 +276,7 @@ export class EmployeePageContentComponent implements OnInit {
     console.log('Employee Selected', toSetValues);
     this.editEmployeeForm.setValue({      
         CompanyName: toSetValues.CompanyDetails.CompanyName,
+        Id: toSetValues.Id,
         Name: toSetValues.Name,
         EmployeeCode: toSetValues.EmployeeCode,
         Gender: toSetValues.Gender.trim(),
