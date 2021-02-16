@@ -379,11 +379,14 @@ export class EmployeePageContentComponent implements OnInit {
   }
 
   //search by name
-  searchId(val) {
+  searchEmployee(val) {
     this.rows.splice(0, this.rows.length);
     let temp = this.srch.filter(function (d) {
       val = val.toLowerCase();
-      return d.employeeId.toLowerCase().indexOf(val) !== -1 || !val;
+      console.log(d.Id);
+      return d.EmployeeCode.toLowerCase().indexOf(val) !== -1 || 
+      d.Name.toLowerCase().indexOf(val) !== -1 || 
+      !val;
     });
     this.rows.push(...temp);
   }
