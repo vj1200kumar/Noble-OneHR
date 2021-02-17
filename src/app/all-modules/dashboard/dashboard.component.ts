@@ -24,7 +24,7 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.router.navigateByUrl("/dashboard/admin");
+    //this.router.navigateByUrl("/dashboard/admin");
   }
 
   onResize(event) {

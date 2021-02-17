@@ -22,6 +22,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BsDatepickerModule } from 'ngx-bootstrap';
 import { SharingModule } from 'src/app/sharing/sharing.module';
 import { PickListModule } from 'primeng/picklist';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [EmployeesComponent, AllEmployeesComponent, EmployeePageContentComponent, EmployeeListComponent, EmployeeProfileComponent, HolidaysComponent, LeavesAdminComponent, LeavesEmployeeComponent, LeaveSettingsComponent, AttendanceAdminComponent, AttendanceEmployeeComponent, DepartmentsComponent, DesignationComponent, TimesheetComponent, OvertimeComponent],
@@ -33,7 +34,7 @@ import { PickListModule } from 'primeng/picklist';
     PickListModule,
     EmployeesRoutingModule, PickListModule,
     BsDatepickerModule.forRoot(),
-    DataTablesModule
+    DataTablesModule,
   ]
 })
 export class EmployeesModule { }

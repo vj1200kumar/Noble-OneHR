@@ -14,26 +14,49 @@
                 <p class="account-subtitle">Access to our dashboard</p>
                 
                 <!-- Account Form -->
-                <form>
+                <form (ngSubmit)="login()" [formGroup]="loginForm">
                     <div class="form-group">
                         <label>Email Address</label>
-                        <input class="form-control" type="text">
+                        <!-- <input class="form-control" type="text"> -->
+
+
+                        <input class="form-control" type="text"
+                        [class.invalid]="loginForm.get('UserName').invalid && loginForm.get('UserName').touched"
+                        formControlName="UserName">
+                    <div
+                        *ngIf="loginForm.get('UserName').invalid && loginForm.get('UserName').touched">
+                        <small
+                            *ngIf="loginForm.get('UserName').invalid && loginForm.get('UserName').touched"
+                            class="text-danger">Email is required</small>
+                    </div>
+
                     </div>
                     <div class="form-group">
                         <div class="row">
                             <div class="col">
                                 <label>Password</label>
                             </div>
-                            <div class="col-auto">
+                            <!-- <div class="col-auto">
                                 <a class="text-muted" routerLink = "/login/forgot">
                                     Forgot password?
                                 </a>
-                            </div>
+                            </div> -->
                         </div>
-                        <input class="form-control" type="password">
+                        <!-- <input class="form-control" type="password"> -->
+                        <input class="form-control" type="password"
+                        [class.invalid]="loginForm.get('Password').invalid && loginForm.get('Password').touched"
+                        formControlName="Password">
+                    <div
+                        *ngIf="loginForm.get('Password').invalid && loginForm.get('Password').touched">
+                        <small
+                            *ngIf="loginForm.get('Password').invalid && loginForm.get('Password').touched"
+                            class="text-danger">Password is not valid or required </small>
+                    </div>
+                    
+
                     </div>
                     <div class="form-group text-center">
-                        <button class="btn btn-primary account-btn" type="button" [routerLink]="['/dashboard/admin']">Login</button>
+                        <button class="btn btn-primary account-btn" type="submit">Login</button>
                     </div>
                     <!-- <div class="account-footer">
                         <p>Don't have an account yet? <a routerLink = "/login/register">Register</a></p>

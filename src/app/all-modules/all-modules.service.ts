@@ -45,6 +45,10 @@ export class AllModulesService {
     return throwError(error);
   }
 
+  private handleErrorLogin(error: any) {
+    return error;
+  }
+
   // Get Method Api
   get(type): Observable<Employee[]> {
     this.apiurl = `api/${type}`;
@@ -58,6 +62,20 @@ export class AllModulesService {
   add(user: any, type): Observable<any> {
     this.apiurl = `https://onehr-employee-service.azurewebsites.net/api/employees?code=R0USqHH5Btohh0iqORO9c6VLTUzaOX6jtNp2onQaa6aasaZlrMRwFQ==`;
     user.id = null;
+    return this.http
+      .post<any>(this.apiurl, user, this.httpOptions)
+      .pipe(
+        map(() => user),
+        catchError(this.handleError)
+      );
+  }
+
+   // Post Method Api
+   login(user: any, type): Observable<any> {
+    this.apiurl = `https://onehr-employee-service.azurewebsites.net/api/employees/login?code=DMHUMzPoAhEZq4nvzck9fbKareaj18eRcfjXGoCfZfNmGwow6xk0dg==`;
+    //user.id = null;
+    console.log(this.http
+      .post<any>(this.apiurl, user, this.httpOptions))
     return this.http
       .post<any>(this.apiurl, user, this.httpOptions)
       .pipe(tap(), catchError(this.handleError));

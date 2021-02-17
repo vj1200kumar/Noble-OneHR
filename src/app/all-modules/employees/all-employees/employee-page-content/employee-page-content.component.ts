@@ -200,22 +200,6 @@ export class EmployeePageContentComponent implements OnInit {
 
     console.log(this.addEmployeeForm.value);
 
-    let obj = {
-      firstname: this.addEmployeeForm.value.FirstName,
-      lastname: this.addEmployeeForm.value.LastName,
-      username: this.addEmployeeForm.value.UserName,
-      email: this.addEmployeeForm.value.Email,
-      password: this.addEmployeeForm.value.Password,
-      confirmpassword: this.addEmployeeForm.value.ConfirmPassword,
-      employeeId: this.addEmployeeForm.value.EmployeeID,
-      joindate: DateJoin,
-      phone: this.addEmployeeForm.value.PhoneNumber,
-      company: this.addEmployeeForm.value.CompanyName,
-      department: this.addEmployeeForm.value.DepartmentName,
-      designation: this.addEmployeeForm.value.Designation,
-      mobile: "9944996335",
-      role: "Web developer",
-    };    
     let finalObj = this.addEmployeeForm.value;
     finalObj.isActive = true
     delete finalObj.BankingAndInsuranceDetails.InsuranceCoverage;
@@ -223,7 +207,7 @@ export class EmployeePageContentComponent implements OnInit {
     console.log('finalObj', finalObj);
     this.srvModuleService.add(finalObj, this.url).subscribe((data) => {
       console.log('data', data);
-     });
+    });
     this.loadEmployee();
     $("#add_employee").modal("hide");
     this.addEmployeeForm.reset();

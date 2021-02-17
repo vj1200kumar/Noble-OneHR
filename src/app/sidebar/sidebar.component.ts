@@ -23,6 +23,10 @@ export class SidebarComponent implements OnInit {
   members = {};
   groups = {};
 
+  userName: string;
+  IsAdmin: boolean;
+
+
   constructor(
     private router: Router,
     private allModulesService: AllModulesService
@@ -55,6 +59,10 @@ export class SidebarComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.userName = localStorage.getItem("username");
+this.IsAdmin = JSON.parse(localStorage.getItem("isadmin"));
+
+
     // Slide up and down of menus
     $(document).on("click", "#sidebar-menu a", function (e) {
       e.stopImmediatePropagation();

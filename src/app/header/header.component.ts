@@ -15,12 +15,21 @@ export class HeaderComponent implements OnInit {
   };
   notifications: any;
   messagesData: any;
+  userName: string;
+  IsAdmin: boolean;
+
 
   constructor(private headerService: HeaderService, private router: Router) {}
 
   ngOnInit() {
     // this.getDatas("notification");
     // this.getDatas("message");
+
+this.userName = localStorage.getItem("username");
+this.IsAdmin =JSON.parse(localStorage.getItem("isadmin"));
+
+console.log(this.userName);
+console.log(this.IsAdmin);
 
     this.notifications = [
       {

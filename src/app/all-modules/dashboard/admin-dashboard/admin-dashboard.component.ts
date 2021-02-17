@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { ActivatedRoute } from "@angular/router";
 
 @Component({
   selector: "app-admin-dashboard",
@@ -18,10 +19,29 @@ export class AdminDashboardComponent implements OnInit {
     a: "#dc3545",
     b: "#6610f2",
   };
+  public userName123: string;
+  public isAdmin123: string;
 
-  constructor() { }
+  constructor(private route: ActivatedRoute) {
+//     this.userName= this.route.snapshot.paramMap.get('username');
+//     this.isAdmin= this.route.snapshot.paramMap.get('isadmin');
+// console.log(route);
+//     console.log("user :" + this.route.snapshot.paramMap.get('username'));
+//     console.log("isAdmin :" + this.isAdmin);
+// this.route.queryParams.subscribe(params => {
+//   // this.name = params['name'];
+
+//    this.userName123= params['username123'];
+//    this.isAdmin123= params['isadmin123'];
+
+//    console.log("user :" + params['username123']);
+//    console.log("isAdmin :" + params['isadmin123']);
+//  });
+  }
 
   ngOnInit() {
+
+    
     this.chartOptions = {
       xkey: "y",
       ykeys: ["a", "b"],

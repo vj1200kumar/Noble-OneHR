@@ -15,7 +15,7 @@
                         </a>
                         <ul style="display: none;"
                             [ngStyle]="{ 'display' : urlComplete.mainUrl === 'dashboard' ? 'block' : 'none' }">
-                            <li routerLink="/dashboard/admin"><a
+                            <li *ngIf="IsAdmin"  routerLink="/dashboard/admin"><a
                                     [ngClass]="{ 'active' : urlComplete.subUrl === 'admin' }" href="javascript:">Admin
                                     Dashboard</a></li>
                             <li routerLink="/dashboard/employee"><a
