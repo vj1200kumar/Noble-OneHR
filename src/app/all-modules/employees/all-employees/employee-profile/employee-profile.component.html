@@ -42,23 +42,27 @@
                                     <ul class="personal-info">
                                         <li>
                                             <div class="title">Phone:</div>
-                                            <div class="text"><a href="">{{currEmpData?.MobileNo}}</a></div>
+                                            <div class="text" style="display: inline-block;"><a href="">{{currEmpData?.MobileNo}}</a></div>
                                         </li>
                                         <li>
                                             <div class="title">Email:</div>
-                                            <div class="text"><a href="">{{currEmpData?.EmailId}}</a></div>
+                                            <div class="text" style="display: inline-block;"><a href="">{{currEmpData?.EmailId}}</a></div>
                                         </li>
                                         <li>
                                             <div class="title">Address:</div>
-                                            <div class="text">{{currEmpData?.AddressDetails?.Street}}, {{currEmpData?.AddressDetails?.District}}, {{currEmpData?.AddressDetails?.City}}</div>
+                                            <div class="text" style="display: inline-block;">{{currEmpData?.AddressDetails?.Street}}, {{currEmpData?.AddressDetails?.District}}, {{currEmpData?.AddressDetails?.City}}</div>
                                         </li>
                                         <li>
                                             <div class="title">Gender:</div>
-                                            <div class="text">{{currEmpData?.Gender}}</div>
+                                            <div class="text" style="display: inline-block;">{{currEmpData?.Gender}}</div>
+                                        </li>
+                                        <li>
+                                            <div class="title">Date of Birth:</div>
+                                            <div class="text" style="display: inline-block;">{{currEmpData?.BirthDate}}</div>
                                         </li>
                                         <li>
                                             <div class="title">Status:</div>
-                                            <div class="text">{{currEmpData?.Status}}</div>
+                                            <div class="text" style="display: inline-block;">{{currEmpData?.Status}}</div>
                                         </li>                                        
                                         <!-- <li>
                                             <div class="title">Reports to:</div>
@@ -107,31 +111,31 @@
                 <div class="col-md-6 d-flex">
                     <div class="card profile-box flex-fill">
                         <div class="card-body">
-                            <h3 class="card-title">Personal Informations></h3>
+                            <h3 class="card-title">Personal Informations</h3>
                             <ul class="personal-info">
                                 <li>
                                     <div class="title">Passport No.</div>
-                                    <div class="text">{{currEmpData?.PassportDetails?.PassportNumber}}</div>
+                                    <div class="text" style="display: inline-block;"><span>{{currEmpData?.PassportDetails?.PassportNumber}}</span> </div>
                                 </li>
                                 <li>
-                                    <div class="title">Passport Issue Date</div>
-                                    <div class="text">{{currEmpData?.PassportDetails?.IssueDate | date}}</div>
+                                    <div class="title" style="display: inline-block;">Passport Issue Date</div>
+                                    <div class="text"><span>{{currEmpData?.PassportDetails?.IssueDate | date}}</span> </div>
                                 </li>
                                 <li>
                                     <div class="title">Passport Issue Place</div>
-                                    <div class="text">{{currEmpData?.PassportDetails?.PlaceOfIssue}}</div>
+                                    <div class="text" style="display: inline-block;"><span>{{currEmpData?.PassportDetails?.PlaceOfIssue}}</span> </div>
                                 </li>
                                 <li>
                                     <div class="title">Nationality</div>
-                                    <div class="text">{{currEmpData?.Nationality}}</div>
+                                    <div class="text" style="display: inline-block;"><span>{{currEmpData?.Nationality}}</span> </div>
                                 </li>
                                 <li>
                                     <div class="title">No. of Dependants</div>
-                                    <div class="text">{{currEmpData?.NoOfDependants}}</div>
+                                    <div class="text" style="display: inline-block;"><span>{{currEmpData?.NoOfDependants}}</span> </div>
                                 </li>
                                 <li>
                                     <div class="title">Blood Group</div>
-                                    <div class="text">{{currEmpData?.BloodGroup}}</div>
+                                    <div class="text" style="display: inline-block;"><span>{{currEmpData?.BloodGroup}}</span> </div>
                                 </li>                                                                
                             </ul>
                         </div>
@@ -145,19 +149,19 @@
                             <ul class="personal-info">
                                 <li>
                                     <div class="title">Name</div>
-                                    <div class="text">{{currEmpData?.EmergencyContactDetails?.ContactName}}</div>
+                                    <div class="text" style="display: inline-block;">{{currEmpData?.EmergencyContactDetails?.ContactName}}</div>
                                 </li>
                                 <li>
                                     <div class="title">Relation</div>
-                                    <div class="text">{{currEmpData?.EmergencyContactDetails?.Relation}}</div>
+                                    <div class="text" style="display: inline-block;">{{currEmpData?.EmergencyContactDetails?.Relation}}</div>
                                 </li>
                                 <li>
                                     <div class="title">Phone</div>
-                                    <div class="text">{{currEmpData?.EmergencyContactDetails?.ConatctNumber}}</div>
+                                    <div class="text" style="display: inline-block;">{{currEmpData?.EmergencyContactDetails?.ConatctNumber}}</div>
                                 </li>
                                 <li>
                                     <div class="title">Email</div>
-                                    <div class="text">{{currEmpData?.EmergencyContactDetails?.Email}}</div>
+                                    <div class="text" style="display: inline-block;">{{currEmpData?.EmergencyContactDetails?.Email}}</div>
                                 </li>                                
                             </ul>
                             <!-- <hr>
@@ -165,15 +169,15 @@
                             <ul class="personal-info">
                                 <li>
                                     <div class="title">Name</div>
-                                    <div class="text">Karen Wills</div>
+                                    <div class="text" style="display: inline-block;">Karen Wills</div>
                                 </li>
                                 <li>
                                     <div class="title">Relationship</div>
-                                    <div class="text">Brother</div>
+                                    <div class="text" style="display: inline-block;">Brother</div>
                                 </li>
                                 <li>
                                     <div class="title">Phone </div>
-                                    <div class="text">9876543210, 9876543210</div>
+                                    <div class="text" style="display: inline-block;">9876543210, 9876543210</div>
                                 </li>
                             </ul> -->
                         </div>
@@ -188,15 +192,15 @@
                             <ul class="personal-info">
                                 <li>
                                     <div class="title">Bank Account No</div>
-                                    <div class="text">{{currEmpData?.BankingAndInsuranceDetails?.BankAccountNoPayroll}}</div>
+                                    <div class="text" style="display: inline-block;">{{currEmpData?.BankingAndInsuranceDetails?.BankAccountNoPayroll}}</div>
                                 </li>
                                 <li>
                                     <div class="title">Insurance Coverage</div>
-                                    <div class="text">{{currEmpData?.BankingAndInsuranceDetails?.InsuranceCoverage}}</div>
+                                    <div class="text" style="display: inline-block;">{{currEmpData?.BankingAndInsuranceDetails?.InsuranceCoverage}}</div>
                                 </li>
                                 <li>
                                     <div class="title">Personal Bank Account</div>
-                                    <div class="text">{{currEmpData?.BankingAndInsuranceDetails?.PersonalBankAccount}}</div>
+                                    <div class="text" style="display: inline-block;">{{currEmpData?.BankingAndInsuranceDetails?.PersonalBankAccount}}</div>
                                 </li>
                             </ul>
                         </div>
@@ -237,19 +241,19 @@
                             <ul class="personal-info">
                                 <li>
                                     <div class="title">Iqama No.</div>
-                                    <div class="text">{{currEmpData?.IqamaDetails?.IqamaId}}</div>
+                                    <div class="text" style="display: inline-block;">{{currEmpData?.IqamaDetails?.IqamaId}}</div>
                                 </li>                                
                                 <li>
                                     <div class="title">Boarder No.</div>
-                                    <div class="text">{{currEmpData?.IqamaDetails?.BoarderNo}}</div>
+                                    <div class="text" style="display: inline-block;">{{currEmpData?.IqamaDetails?.BoarderNo}}</div>
                                 </li>
                                 <li>
                                     <div class="title">Expiry Date</div>
-                                    <div class="text">{{currEmpData?.IqamaDetails?.DateOfExpiry | date}}</div>
+                                    <div class="text" style="display: inline-block;">{{currEmpData?.IqamaDetails?.DateOfExpiry | date}}</div>
                                 </li>
                                 <li>
                                     <div class="title">Expired</div>
-                                    <div class="text">{{currEmpData?.IqamaDetails?.IsIqamaExpired === true ? 'Yes' : 'No'}}</div>
+                                    <div class="text" style="display: inline-block;">{{currEmpData?.IqamaDetails?.IsIqamaExpired === true ? 'Yes' : 'No'}}</div>
                                 </li>                                
                             </ul>                        
                         </div>
@@ -295,27 +299,27 @@
                             <ul class="personal-info">
                                 <li>
                                     <div class="title">Basic</div>
-                                    <div class="text">{{currEmpData?.SalaryDetails?.BasicSalary}}</div>
+                                    <div class="text" style="display: inline-block;">{{currEmpData?.SalaryDetails?.BasicSalary}}</div>
                                 </li>                                
                                 <li>
                                     <div class="title">Deductions</div>
-                                    <div class="text">{{currEmpData?.SalaryDetails?.Deductions}}</div>
+                                    <div class="text" style="display: inline-block;">{{currEmpData?.SalaryDetails?.Deductions}}</div>
                                 </li>
                                 <li>
                                     <div class="title">Housing Allowance</div>
-                                    <div class="text">{{currEmpData?.SalaryDetails?.HousingAllowance}}</div>
+                                    <div class="text" style="display: inline-block;">{{currEmpData?.SalaryDetails?.HousingAllowance}}</div>
                                 </li>
                                 <li>
                                     <div class="title">Transportaion Allowance</div>
-                                    <div class="text">{{currEmpData?.SalaryDetails?.TransportaionAllowance}}</div>
+                                    <div class="text" style="display: inline-block;">{{currEmpData?.SalaryDetails?.TransportaionAllowance}}</div>
                                 </li>
                                 <li>
                                     <div class="title">Other Allowances</div>
-                                    <div class="text">{{currEmpData?.SalaryDetails?.OtherAllowances}}</div>
+                                    <div class="text" style="display: inline-block;">{{currEmpData?.SalaryDetails?.OtherAllowances}}</div>
                                 </li>
                                 <li>
                                     <div class="title">Total Salary</div>
-                                    <div class="text">{{currEmpData?.SalaryDetails?.TotalSalary}}</div>
+                                    <div class="text" style="display: inline-block;">{{currEmpData?.SalaryDetails?.TotalSalary}}</div>
                                 </li>                                
                             </ul>                              
                         </div>
@@ -375,15 +379,15 @@
                                 <ul class="personal-info">
                                     <li>
                                         <div class="title">Balance</div>
-                                        <div class="text">{{currEmpData?.VacationDetails?.VacationBalance}} Days</div>
+                                        <div class="text" style="display: inline-block;">{{currEmpData?.VacationDetails?.VacationBalance}} Days</div>
                                     </li>
                                     <li>
                                         <div class="title">Last Vacation Date</div>
-                                        <div class="text">{{currEmpData?.VacationDetails?.LastVacationDate | date}}</div>
+                                        <div class="text" style="display: inline-block;">{{currEmpData?.VacationDetails?.LastVacationDate | date}}</div>
                                     </li>
                                     <li>
                                         <div class="title">Last Resumption Date</div>
-                                        <div class="text">{{currEmpData?.VacationDetails?.LastResumptionDate | date}}</div>
+                                        <div class="text" style="display: inline-block;">{{currEmpData?.VacationDetails?.LastResumptionDate | date}}</div>
                                     </li>
                                 </ul>
                                 <div class="table-responsive">

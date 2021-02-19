@@ -77,7 +77,7 @@ export class EmployeePageContentComponent implements OnInit {
         ContactName: [],
         Relation: [],
         Email: [],
-        ConatctNumber: [],
+        ContactNo: [],
       }),
       BankingAndInsuranceDetails: this.formBuilder.group({
         BankAccountNoPayroll: [],
@@ -87,10 +87,10 @@ export class EmployeePageContentComponent implements OnInit {
       SalaryDetails: this.formBuilder.group({
         TotalSalary: [],
         BasicSalary: [],
-        HosusingAllowances: [],
-        TransportAllowances: [],
+        HousingAllowance: [],
+        TransporationAllowance: [],
         Deductions: [],
-        OtherAllowancess: [],
+        OtherAllowances: [],
       }),
       ActiveVacationDetails: this.formBuilder.group({
         VacationType: [],
@@ -151,7 +151,7 @@ export class EmployeePageContentComponent implements OnInit {
         ContactName: [],
         Relation: [],
         Email: [],
-        ConatctNumber: [],
+        ContactNo: [],
       }),
       BankingAndInsuranceDetails: this.formBuilder.group({
         BankAccountNoPayroll: [],
@@ -161,10 +161,10 @@ export class EmployeePageContentComponent implements OnInit {
       SalaryDetails: this.formBuilder.group({
         TotalSalary: [],
         BasicSalary: [],
-        HosusingAllowances: [],
-        TransportAllowances: [],
+        HousingAllowance: [],
+        TransporationAllowance: [],
         Deductions: [],
-        OtherAllowancess: [],
+        OtherAllowances: [],
       }),
       ActiveVacationDetails: this.formBuilder.group({
         VacationType: [],
@@ -220,32 +220,17 @@ export class EmployeePageContentComponent implements OnInit {
       this.editEmployeeForm.value.JoinDate,
       "dd-MM-yyyy"
     );
-    let obj = {
-      firstname: this.editEmployeeForm.value.FirstName,
-      lastname: this.editEmployeeForm.value.LastName,
-      username: this.editEmployeeForm.value.UserName,
-      email: this.editEmployeeForm.value.Email,
-      password: this.editEmployeeForm.value.Password,
-      confirmpassword: this.editEmployeeForm.value.ConfirmPassword,
-      employeeId: this.editEmployeeForm.value.EmployeeID,
-      joindate: DateJoin,
-      phone: this.editEmployeeForm.value.PhoneNumber,
-      company: this.editEmployeeForm.value.CompanyName,
-      department: this.editEmployeeForm.value.DepartmentName,
-      designation: this.editEmployeeForm.value.Designation,
-      mobile: "9944996335",
-      role: "Web developer",
-      id: this.editId,
-    };
+
     let finalObj = this.editEmployeeForm.value;
     finalObj.isActive = true
     delete finalObj.BankingAndInsuranceDetails.InsuranceCoverage;
     finalObj.IqamaDetails.IsIqamaExpired = false;
-    console.log('finalObj', finalObj);    
+    console.log('finalObj', finalObj);
     this.srvModuleService.update(finalObj, this.url).subscribe((data) => {
       console.log('data', data);
+      this.loadEmployee();
     });
-    this.loadEmployee();
+    
     $("#edit_employee").modal("hide");
     this.toastr.success("Employeee Updated sucessfully...!", "Success");
   }
@@ -253,84 +238,87 @@ export class EmployeePageContentComponent implements OnInit {
   // To Get The employee Edit Id And Set Values To Edit Modal Form
   editEmp(value) {
     this.editId = value;
+    console.log('val1', value);
     const index = this.lstEmployee.findIndex((item) => {
       return item.Id === value;
     });
+    console.log('val2', index);
     let toSetValues = this.lstEmployee[index];
-    console.log('Employee Selected', toSetValues);
-    this.editEmployeeForm.setValue({      
-        CompanyName: toSetValues.CompanyDetails.CompanyName,
-        Id: toSetValues.Id,
-        Name: toSetValues.Name,
-        EmployeeCode: toSetValues.EmployeeCode,
-        Gender: toSetValues.Gender.trim(),
-        BirthDate: toSetValues.BirthDate,
-        MobileNo: toSetValues.MobileNo,
-        EmailId: toSetValues.EmailId,
-        BloodGroup: toSetValues.BloodGroup,
-        Nationality: toSetValues.Nationality,
-        NoOfDependants: toSetValues.NoOfDependants,
-        Status: toSetValues.Status,
-        CompanyDetails: {
-          CompanyNo: toSetValues.CompanyDetails.CompanyNo,
-          CompanyName: toSetValues.CompanyDetails.CompanyName,
-          Position: toSetValues.CompanyDetails.Position,
-          EntryDate: toSetValues.CompanyDetails.EntryDate,
-          HiringDate: toSetValues.CompanyDetails.HiringDate,
-        },
-        AddressDetails: {
-          AddressType: toSetValues.AddressDetails.AddressType,
-          Address1: toSetValues.AddressDetails.Address1,
-          Address2: toSetValues.AddressDetails.Address2,
-          Street: toSetValues.AddressDetails.Street,
-          City: toSetValues.AddressDetails.City,
-          district: toSetValues.AddressDetails.District
-        },
-        IqamaDetails: {
-          IqamaId: toSetValues.IqamaDetails.IqamaId,
-          BoarderNo: toSetValues.IqamaDetails.BoarderNo,
-          IsIqamaExpired: toSetValues.IqamaDetails.IsIqamaExpired,
-          DateOfExpiry: toSetValues.IqamaDetails.DateOfExpiry
-        },
-        PassportDetails: {
-          PassportNumber: toSetValues.PassportDetails.PassportNumber,
-          PlaceOfIssue: toSetValues.PassportDetails.PlaceOfIssue,
-          IssueDate: toSetValues.PassportDetails.IssueDate,
-          DateOfExpiry: toSetValues.PassportDetails.DateOfExpiry
-        },
-        EmergencyContactDetails: {
-          ContactName: toSetValues.EmergencyContactDetails.ContactName,
-          Relation: toSetValues.EmergencyContactDetails.Relation,
-          Email: toSetValues.EmergencyContactDetails.Email,
-          ConatctNumber: toSetValues.EmergencyContactDetails.ConatctNumber
-        },
-        BankingAndInsuranceDetails: {
-          BankAccountNoPayroll: toSetValues.BankingAndInsuranceDetails.BankAccountNoPayroll,
-          PersonalBankAccount: toSetValues.BankingAndInsuranceDetails.PersonalBankAccount,
-          InsuranceCoverage: toSetValues.BankingAndInsuranceDetails.InsuranceCoverage
-        },
-        SalaryDetails: {
-          TotalSalary: toSetValues.SalaryDetails.TotalSalary,
-          BasicSalary: toSetValues.SalaryDetails.BasicSalary,
-          HosusingAllowances: toSetValues.SalaryDetails.HousingAllowance,
-          TransportAllowances: toSetValues.SalaryDetails.TransportaionAllowance,
-          Deductions: toSetValues.SalaryDetails.Deductions,
-          OtherAllowancess: toSetValues.SalaryDetails.OtherAllowances
-        },
-        ActiveVacationDetails: {
-          VacationType: toSetValues.ActiveVacationDetails.VacationType,
-          Date: toSetValues.ActiveVacationDetails.Date,
-          VacationStartDate: toSetValues.ActiveVacationDetails.VacationStartDate,
-          VacationEndDate: toSetValues.ActiveVacationDetails.VacationEndDate,
-          TotalVacationDays: toSetValues.ActiveVacationDetails.TotalVacationDays,
-          Notes: toSetValues.ActiveVacationDetails.Notes
-        },
-        VacationDetails: {
-          VacationBalance: toSetValues.VacationDetails.VacationBalance,
-          LastVacationDate: toSetValues.VacationDetails.LastVacationDate,
-          LastResumptionDate: toSetValues.VacationDetails.LastResumptionDate
-        }
-      });
+    // console.log('Employee Selected', toSetValues);
+    // console.log('entry date', toSetValues.CompanyDetails?.EntryDate)
+    this.editEmployeeForm.setValue({
+      CompanyName: toSetValues.CompanyDetails?.CompanyName ? toSetValues.CompanyDetails?.CompanyName : '' ,
+      Id: toSetValues.Id ? toSetValues.Id : '',
+      Name: toSetValues.Name,
+      EmployeeCode: toSetValues.EmployeeCode,
+      Gender: toSetValues.Gender ? toSetValues.Gender.trim() : '',
+      BirthDate: toSetValues.BirthDate ? toSetValues.BirthDate : '',
+      MobileNo: toSetValues.MobileNo ? toSetValues.MobileNo : '',
+      EmailId: toSetValues.EmailId ? toSetValues.EmailId : '',
+      BloodGroup: toSetValues.BloodGroup ? toSetValues.BloodGroup : '',
+      Nationality: toSetValues.Nationality ? toSetValues.Nationality : '',
+      NoOfDependants: toSetValues.NoOfDependants ? toSetValues.NoOfDependants : '',
+      Status: toSetValues.Status ? toSetValues.Status : '',
+      CompanyDetails: {
+        CompanyNo: toSetValues.CompanyDetails?.CompanyNo ? toSetValues.CompanyDetails?.CompanyNo : '',
+        CompanyName: toSetValues.CompanyDetails?.CompanyName ? toSetValues.CompanyDetails?.CompanyName : '' ,
+        Position: toSetValues.CompanyDetails?.Position ? toSetValues.CompanyDetails?.Position : '',
+        EntryDate: toSetValues.CompanyDetails?.EntryDate ? toSetValues.CompanyDetails?.EntryDate : '',
+        HiringDate: toSetValues.CompanyDetails?.HiringDate ? toSetValues.CompanyDetails?.HiringDate : '',
+      },
+      AddressDetails: {
+        AddressType: toSetValues.AddressDetails?.AddressType ? toSetValues.AddressDetails?.AddressType : '',
+        Address1: toSetValues.AddressDetails?.Address1 ? toSetValues.AddressDetails?.Address1 : '',
+        Address2: toSetValues.AddressDetails?.Address2 ? toSetValues.AddressDetails?.Address2 : '',
+        Street: toSetValues.AddressDetails?.Street ? toSetValues.AddressDetails?.Street : '',
+        City: toSetValues.AddressDetails?.City ? toSetValues.AddressDetails?.City : '',
+        district: toSetValues.AddressDetails?.District ? toSetValues.AddressDetails?.District : ''
+      },
+      IqamaDetails: {
+        IqamaId: toSetValues.IqamaDetails?.IqamaId ? toSetValues.IqamaDetails?.IqamaId : '',
+        BoarderNo: toSetValues.IqamaDetails?.BoarderNo ? toSetValues.IqamaDetails?.BoarderNo : '',
+        IsIqamaExpired: toSetValues.IqamaDetails?.IsIqamaExpired ? toSetValues.IqamaDetails?.IsIqamaExpired : '',
+        DateOfExpiry: toSetValues.IqamaDetails?.DateOfExpiry ? toSetValues.IqamaDetails?.DateOfExpiry : ''
+      },
+      PassportDetails: {
+        PassportNumber: toSetValues.PassportDetails?.PassportNumber ? toSetValues.PassportDetails?.PassportNumber : '',
+        PlaceOfIssue: toSetValues.PassportDetails?.PlaceOfIssue ? toSetValues.PassportDetails?.PlaceOfIssue : '',
+        IssueDate: toSetValues.PassportDetails?.IssueDate ? toSetValues.PassportDetails?.IssueDate : '',
+        DateOfExpiry: toSetValues.PassportDetails?.DateOfExpiry ? toSetValues.PassportDetails?.DateOfExpiry : ''
+      },
+      EmergencyContactDetails: {
+        ContactName: toSetValues.EmergencyContactDetails?.ContactName ? toSetValues.EmergencyContactDetails?.ContactName : '',
+        Relation: toSetValues.EmergencyContactDetails?.Relation ? toSetValues.EmergencyContactDetails?.Relation : '',
+        Email: toSetValues.EmergencyContactDetails?.Email ? toSetValues.EmergencyContactDetails?.Email : '',
+        ContactNo: toSetValues.EmergencyContactDetails?.ContactNo ? toSetValues.EmergencyContactDetails?.ContactNo : ''
+      },
+      BankingAndInsuranceDetails: {
+        BankAccountNoPayroll: toSetValues.BankingAndInsuranceDetails?.BankAccountNoPayroll ?  toSetValues.BankingAndInsuranceDetails?.BankAccountNoPayroll : '',
+        PersonalBankAccount: toSetValues.BankingAndInsuranceDetails?.PersonalBankAccount ? toSetValues.BankingAndInsuranceDetails?.PersonalBankAccount : '',
+        InsuranceCoverage: toSetValues.BankingAndInsuranceDetails?.InsuranceCoverage ? toSetValues.BankingAndInsuranceDetails?.InsuranceCoverage : ''
+      },
+      SalaryDetails: {
+        TotalSalary: toSetValues.SalaryDetails?.TotalSalary ? toSetValues.SalaryDetails?.TotalSalary : '',
+        BasicSalary: toSetValues.SalaryDetails?.BasicSalary ? toSetValues.SalaryDetails?.BasicSalary : '',
+        HousingAllowance: toSetValues.SalaryDetails?.HousingAllowance ? toSetValues.SalaryDetails?.HousingAllowance : '',
+        TransporationAllowance: toSetValues.SalaryDetails?.TransporationAllowance ? toSetValues.SalaryDetails?.TransporationAllowance : '',
+        Deductions: toSetValues.SalaryDetails?.Deductions ? toSetValues.SalaryDetails?.Deductions : '',
+        OtherAllowances: toSetValues.SalaryDetails?.OtherAllowances ? toSetValues.SalaryDetails?.OtherAllowances : ''
+      },
+      ActiveVacationDetails: {
+        VacationType: toSetValues.ActiveVacationDetails?.VacationType ? toSetValues.ActiveVacationDetails?.VacationType : '',
+        Date: toSetValues.ActiveVacationDetails?.Date ? toSetValues.ActiveVacationDetails?.Date : '',
+        VacationStartDate: toSetValues.ActiveVacationDetails?.VacationStartDate ? toSetValues.ActiveVacationDetails?.VacationStartDate : '',
+        VacationEndDate: toSetValues.ActiveVacationDetails?.VacationEndDate ? toSetValues.ActiveVacationDetails?.VacationEndDate : '',
+        TotalVacationDays: toSetValues.ActiveVacationDetails?.TotalVacationDays ? toSetValues.ActiveVacationDetails?.TotalVacationDays : '',
+        Notes: toSetValues.ActiveVacationDetails?.Notes ? toSetValues.ActiveVacationDetails?.Notes : ''
+      },
+      VacationDetails: {
+        VacationBalance: toSetValues.VacationDetails?.VacationBalance ?  toSetValues.VacationDetails?.VacationBalance : '',
+        LastVacationDate: toSetValues.VacationDetails?.LastVacationDate ? toSetValues.VacationDetails?.LastVacationDate : '',
+        LastResumptionDate: toSetValues.VacationDetails?.LastResumptionDate ? toSetValues.VacationDetails?.LastResumptionDate : ''
+      }
+    });
   }
 
   // edit update data set
@@ -368,9 +356,9 @@ export class EmployeePageContentComponent implements OnInit {
     let temp = this.srch.filter(function (d) {
       val = val.toLowerCase();
       console.log(d.Id);
-      return d.EmployeeCode.toLowerCase().indexOf(val) !== -1 || 
-      d.Name.toLowerCase().indexOf(val) !== -1 || 
-      !val;
+      return d.EmployeeCode.toLowerCase().indexOf(val) !== -1 ||
+        d.Name.toLowerCase().indexOf(val) !== -1 ||
+        !val;
     });
     this.rows.push(...temp);
   }

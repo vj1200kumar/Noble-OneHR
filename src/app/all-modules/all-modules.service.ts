@@ -86,7 +86,7 @@ export class AllModulesService {
     this.apiurl = this.apiEndPoint + `?code=NV2muqEhnX4fk0ZwDwZTr9xLHaeHWA6W6R2MW0dmWMR9Yj0cJghMVg==`;
     // const url = `${this.apiurl}/${user.id}`;
     return this.http.put<any>(this.apiurl, user, this.httpOptions).pipe(
-      map(() => user),
+      map(() => 'updated'),
       catchError(this.handleError)
     );
   }

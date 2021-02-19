@@ -271,8 +271,16 @@
                                             [class.invalid]="addEmployeeForm.get('Nationality').invalid && addEmployeeForm.get('Nationality').touched"
                                             formControlName="Nationality">
                                             <option value="">-- Select --</option>
-                                            <option value="10000">Arabic</option>
-                                            <option value="10001">Pakistani</option>
+                                            <option value="10000">Indian</option>
+                                            <option value="10002">Chinese</option>
+                                            <option value="10003">American</option>
+                                            <option value="10004">Pakistani</option>
+                                            <option value="10005">Filipino</option>
+                                            <option value="10006">Egyption</option>
+                                            <option value="10007">Saudi </option>
+                                            <option value="10007">Yemeni </option>
+                                            <option value="10007">Syrian </option>
+                                            <option value="10007">Jordanian </option>
                                         </select>
                                         <!-- <div
                                     *ngIf="addEmployeeForm.get('Gender').invalid && addEmployeeForm.get('Gender').touched">
@@ -543,10 +551,24 @@
 
                                 <div class="col-sm-6">
                                     <div class="form-group">
-                                        <label class="col-form-label"> Passport Number </label>
-                                        <input class="form-control" type="text"
+                                        <label class="col-form-label"> Place of Issue </label>
+                                        <!-- <input class="form-control" type="text"
+                                            [class.invalid]="addEmployeeForm.get('PassportDetails.PlaceOfIssue').invalid && addEmployeeForm.get('PassportDetails.PlaceOfIssue').touched"
+                                            formControlName="PlaceOfIssue"> -->
+
+                                            <select class="select form-control"
                                             [class.invalid]="addEmployeeForm.get('PassportDetails.PlaceOfIssue').invalid && addEmployeeForm.get('PassportDetails.PlaceOfIssue').touched"
                                             formControlName="PlaceOfIssue">
+                                            <option value="">-- Select --</option>
+                                            <option value="10000">Abu Dhabi</option>
+                                            <option value="10001">India</option>
+                                            <option value="10002">Jeddah</option>
+                                            <option value="10003">Pakistan</option>
+                                            <option value="10004">Philippines</option>
+                                            <option value="10005">Egypt</option>
+
+
+                                        </select>
                                     </div>
                                 </div>
 
@@ -599,8 +621,11 @@
                                             [class.invalid]="addEmployeeForm.get('EmergencyContactDetails.Relation').invalid && addEmployeeForm.get('EmergencyContactDetails.Relation').touched"
                                             formControlName="Relation">
                                             <option value="">-- Select --</option>
-                                            <option value="10000">Wife</option>
-                                            <option value="10001">Sons</option>
+                                            <option value="10000">Spouse</option>
+                                            <option value="10001">Husband</option>
+                                            <option value="10001">Sibling</option>
+                                            <option value="10001">Parents</option>
+                                            <option value="10001">Son</option>
                                         </select>
                                     </div>
                                 </div>
@@ -618,8 +643,8 @@
                                     <div class="form-group">
                                         <label class="col-form-label"> Contact No </label>
                                         <input class="form-control" type="text"
-                                            [class.invalid]="addEmployeeForm.get('EmergencyContactDetails.ConatctNumber').invalid && addEmployeeForm.get('EmergencyContactDetails.ConatctNumber').touched"
-                                            formControlName="ConatctNumber">
+                                            [class.invalid]="addEmployeeForm.get('EmergencyContactDetails.ContactNo').invalid && addEmployeeForm.get('EmergencyContactDetails.ContactNo').touched"
+                                            formControlName="ContactNo">
                                     </div>
                                 </div>
 
@@ -689,8 +714,8 @@
                                     <div class="form-group">
                                         <label class="col-form-label"> Hosusing Allowances </label>
                                         <input class="form-control" type="text"
-                                            [class.invalid]="addEmployeeForm.get('SalaryDetails.HosusingAllowances').invalid && addEmployeeForm.get('SalaryDetails.HosusingAllowances').touched"
-                                            formControlName="HosusingAllowances">
+                                            [class.invalid]="addEmployeeForm.get('SalaryDetails.HousingAllowance').invalid && addEmployeeForm.get('SalaryDetails.HousingAllowance').touched"
+                                            formControlName="HousingAllowance">
                                     </div>
                                 </div>
 
@@ -698,8 +723,8 @@
                                     <div class="form-group">
                                         <label class="col-form-label"> Transport Allowances </label>
                                         <input class="form-control" type="text"
-                                            [class.invalid]="addEmployeeForm.get('SalaryDetails.TransportAllowances').invalid && addEmployeeForm.get('SalaryDetails.TransportAllowances').touched"
-                                            formControlName="TransportAllowances">
+                                            [class.invalid]="addEmployeeForm.get('SalaryDetails.TransporationAllowance').invalid && addEmployeeForm.get('SalaryDetails.TransporationAllowance').touched"
+                                            formControlName="TransporationAllowance">
                                     </div>
                                 </div>
 
@@ -716,8 +741,8 @@
                                     <div class="form-group">
                                         <label class="col-form-label"> Other Allowancess </label>
                                         <input class="form-control" type="text"
-                                            [class.invalid]="addEmployeeForm.get('SalaryDetails.OtherAllowancess').invalid && addEmployeeForm.get('SalaryDetails.OtherAllowancess').touched"
-                                            formControlName="OtherAllowancess">
+                                            [class.invalid]="addEmployeeForm.get('SalaryDetails.OtherAllowances').invalid && addEmployeeForm.get('SalaryDetails.OtherAllowances').touched"
+                                            formControlName="OtherAllowances">
                                     </div>
                                 </div>
 
@@ -738,8 +763,14 @@
                                             [class.invalid]="addEmployeeForm.get('ActiveVacationDetails.VacationType').invalid && addEmployeeForm.get('ActiveVacationDetails.VacationType').touched"
                                             formControlName="VacationType">
                                             <option value="">-- Select --</option>
-                                            <option value="10000">Annual</option>
-                                            <option value="10001">Sick Leave</option>
+                                            <option value="10000">Annual Leave</option>
+                                            <option value="10001">Maternity Leave</option>
+                                            <option value="10002">Compession Leave</option>
+                                            <option value="10003">Unpaid Leave</option>
+                                            <option value="10004">Sick Leave - Paid fully for 30 days</option>
+                                            <option value="10005">Sick Leave - 75% for the next 60 days</option>
+                                            <option value="10006">Sick Leave - Unpaid for the next 30 days</option>
+                                            
                                         </select>
                                     </div>
                                 </div>
@@ -1043,8 +1074,16 @@
                                             [class.invalid]="editEmployeeForm.get('Nationality').invalid && editEmployeeForm.get('Nationality').touched"
                                             formControlName="Nationality">
                                             <option value="">-- Select --</option>
-                                            <option value="10000">Arabic</option>
-                                            <option value="10001">Pakistani</option>
+                                            <option value="10000">Indian</option>
+                                            <option value="10002">Chinese</option>
+                                            <option value="10003">American</option>
+                                            <option value="10004">Pakistani</option>
+                                            <option value="10005">Filipino</option>
+                                            <option value="10006">Egyption</option>
+                                            <option value="10007">Saudi </option>
+                                            <option value="10007">Yemeni </option>
+                                            <option value="10007">Syrian </option>
+                                            <option value="10007">Jordanian </option>
                                         </select>
                                         <!-- <div
                                     *ngIf="editEmployeeForm.get('Gender').invalid && editEmployeeForm.get('Gender').touched">
@@ -1315,10 +1354,24 @@
 
                                 <div class="col-sm-6">
                                     <div class="form-group">
-                                        <label class="col-form-label"> Passport Number </label>
-                                        <input class="form-control" type="text"
+                                        <label class="col-form-label"> Place of Issue </label>
+                                        <!-- <input class="form-control" type="text"
+                                            [class.invalid]="editEmployeeForm.get('PassportDetails.PlaceOfIssue').invalid && editEmployeeForm.get('PassportDetails.PlaceOfIssue').touched"
+                                            formControlName="PlaceOfIssue"> -->
+
+                                            <select class="select form-control"
                                             [class.invalid]="editEmployeeForm.get('PassportDetails.PlaceOfIssue').invalid && editEmployeeForm.get('PassportDetails.PlaceOfIssue').touched"
                                             formControlName="PlaceOfIssue">
+                                            <option value="">-- Select --</option>
+                                            <option value="10000">Abu Dhabi</option>
+                                            <option value="10001">India</option>
+                                            <option value="10002">Jeddah</option>
+                                            <option value="10003">Pakistan</option>
+                                            <option value="10004">Philippines</option>
+                                            <option value="10005">Egypt</option>
+
+
+                                        </select>
                                     </div>
                                 </div>
 
@@ -1371,8 +1424,11 @@
                                             [class.invalid]="editEmployeeForm.get('EmergencyContactDetails.Relation').invalid && editEmployeeForm.get('EmergencyContactDetails.Relation').touched"
                                             formControlName="Relation">
                                             <option value="">-- Select --</option>
-                                            <option value="10000">Wife</option>
-                                            <option value="10001">Sons</option>
+                                            <option value="10000">Spouse</option>
+                                            <option value="10001">Husband</option>
+                                            <option value="10001">Sibling</option>
+                                            <option value="10001">Parents</option>
+                                            <option value="10001">Son</option>
                                         </select>
                                     </div>
                                 </div>
@@ -1390,8 +1446,8 @@
                                     <div class="form-group">
                                         <label class="col-form-label"> Contact No </label>
                                         <input class="form-control" type="text"
-                                            [class.invalid]="editEmployeeForm.get('EmergencyContactDetails.ConatctNumber').invalid && editEmployeeForm.get('EmergencyContactDetails.ConatctNumber').touched"
-                                            formControlName="ConatctNumber">
+                                            [class.invalid]="editEmployeeForm.get('EmergencyContactDetails.ContactNo').invalid && editEmployeeForm.get('EmergencyContactDetails.ContactNo').touched"
+                                            formControlName="ContactNo">
                                     </div>
                                 </div>
 
@@ -1459,10 +1515,10 @@
 
                                 <div class="col-sm-6">
                                     <div class="form-group">
-                                        <label class="col-form-label"> Hosusing Allowances </label>
+                                        <label class="col-form-label"> Housing Allowances </label>
                                         <input class="form-control" type="text"
-                                            [class.invalid]="editEmployeeForm.get('SalaryDetails.HosusingAllowances').invalid && editEmployeeForm.get('SalaryDetails.HosusingAllowances').touched"
-                                            formControlName="HosusingAllowances">
+                                            [class.invalid]="editEmployeeForm.get('SalaryDetails.HousingAllowance').invalid && editEmployeeForm.get('SalaryDetails.HousingAllowance').touched"
+                                            formControlName="HousingAllowance">
                                     </div>
                                 </div>
 
@@ -1470,8 +1526,8 @@
                                     <div class="form-group">
                                         <label class="col-form-label"> Transport Allowances </label>
                                         <input class="form-control" type="text"
-                                            [class.invalid]="editEmployeeForm.get('SalaryDetails.TransportAllowances').invalid && editEmployeeForm.get('SalaryDetails.TransportAllowances').touched"
-                                            formControlName="TransportAllowances">
+                                            [class.invalid]="editEmployeeForm.get('SalaryDetails.TransporationAllowance').invalid && editEmployeeForm.get('SalaryDetails.TransporationAllowance').touched"
+                                            formControlName="TransporationAllowance">
                                     </div>
                                 </div>
 
@@ -1488,8 +1544,8 @@
                                     <div class="form-group">
                                         <label class="col-form-label"> Other Allowancess </label>
                                         <input class="form-control" type="text"
-                                            [class.invalid]="editEmployeeForm.get('SalaryDetails.OtherAllowancess').invalid && editEmployeeForm.get('SalaryDetails.OtherAllowancess').touched"
-                                            formControlName="OtherAllowancess">
+                                            [class.invalid]="editEmployeeForm.get('SalaryDetails.OtherAllowances').invalid && editEmployeeForm.get('SalaryDetails.OtherAllowances').touched"
+                                            formControlName="OtherAllowances">
                                     </div>
                                 </div>
 
@@ -1510,8 +1566,13 @@
                                             [class.invalid]="editEmployeeForm.get('ActiveVacationDetails.VacationType').invalid && editEmployeeForm.get('ActiveVacationDetails.VacationType').touched"
                                             formControlName="VacationType">
                                             <option value="">-- Select --</option>
-                                            <option value="10000">Annual</option>
-                                            <option value="10001">Sick Leave</option>
+                                            <option value="10000">Annual Leave</option>
+                                            <option value="10001">Maternity Leave</option>
+                                            <option value="10002">Compession Leave</option>
+                                            <option value="10003">Unpaid Leave</option>
+                                            <option value="10004">Sick Leave - Paid fully for 30 days</option>
+                                            <option value="10005">Sick Leave - 75% for the next 60 days</option>
+                                            <option value="10006">Sick Leave - Unpaid for the next 30 days</option>
                                         </select>
                                     </div>
                                 </div>
